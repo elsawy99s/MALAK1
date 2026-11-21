@@ -1,0 +1,2069 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090c16">
+  <meta name="description" content="مساحة صغيرة لملك، مليانة كلام حلو وذكريات.">
+  <title>إلى ملك، بحب ♥</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f0eff7;
+      --muted: #aaa9bd;
+      --violet: #a7a4d5;
+      --pink: #e0a6bc;
+      --glass: rgba(27,30,47,.58);
+      --glass-strong: rgba(31,34,52,.8);
+      --stroke: rgba(230,225,255,.13);
+      --shadow: 0 24px 70px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.1);
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", "Cairo", Tahoma, sans-serif;
+    }
+    * { box-sizing: border-box }
+    html { min-height: 100%; scroll-behavior: smooth }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font: 14px/1.7 var(--font);
+      background:
+        radial-gradient(ellipse at 10% 12%, rgba(96,65,112,.25), transparent 36%),
+        radial-gradient(ellipse at 92% 18%, rgba(45,76,125,.25), transparent 37%),
+        radial-gradient(ellipse at 53% 105%, rgba(80,48,83,.19), transparent 39%),
+        linear-gradient(145deg,#090b13,#101522 54%,#12111c);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      -webkit-text-size-adjust: 100%;
+    }
+    button,input,textarea { font: inherit }
+    button { color: inherit; cursor: pointer }
+    button:focus-visible,input:focus-visible,textarea:focus-visible { outline: 2px solid #827bbc; outline-offset: 3px }
+    .hidden { display: none !important }
+    .sky { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none }
+    .blur-orb { position: absolute; width: 42vw; height: 42vw; min-width: 260px; min-height: 260px; border-radius: 50%; filter: blur(80px); opacity: .4; animation: drift 18s ease-in-out infinite alternate }
+    .orb-left { top: -18%; left: -10%; background: #805477 }
+    .orb-right { right: -17%; bottom: -19%; background: #3e6397; animation-delay: -7s }
+    .star { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #fff; box-shadow: 0 0 10px 3px #fff9; animation: twinkle 3s ease-in-out infinite alternate }
+    .star-a { top: 17%; right: 20% }.star-b { top: 70%; left: 16%; animation-delay: -1.4s }.star-c { top: 43%; right: 9%; width: 3px;height:3px;animation-delay:-.7s }
+    .glass {
+      background: linear-gradient(145deg,rgba(255,255,255,.76),rgba(255,255,255,.39));
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(28px) saturate(1.35);
+      -webkit-backdrop-filter: blur(28px) saturate(1.35);
+    }
+
+    /* A quiet lock screen with its own little love illustration. */
+    .lock-screen {
+      min-height: 100svh; padding: 24px clamp(18px,5vw,70px);
+      display: grid; place-items: center; position: relative; isolation: isolate;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1), filter .7s ease;
+    }
+    .lock-screen.unlocking { opacity: 0; transform: scale(1.04); filter: blur(9px); pointer-events: none }
+    .lock-topline { position: absolute; top: 24px; right: clamp(18px,5vw,70px); left: clamp(18px,5vw,70px); display: flex; justify-content: space-between; align-items: center; color: #77788d; font-size: 10px; letter-spacing: .3px }
+    .lock-topline b { color: var(--ink); font-size: 11px; font-weight: 650 }
+    .lock-topline span:last-child { direction: ltr; font-size: 9px; letter-spacing: 1.5px }
+    .lock-card {
+      width: min(440px,100%); min-height: 0; border-radius: 30px;
+      display: grid; grid-template-columns: 1fr; overflow: hidden;
+      position: relative; animation: card-arrive .9s cubic-bezier(.2,.8,.2,1) both;
+    }
+    .lock-copy { display: flex; align-items: center; flex-direction: column; justify-content: center; padding: 22px clamp(20px,5vw,36px) 25px; text-align: center; position: relative; z-index: 1 }
+    .lock-kicker { color: #85839b; font-size: 9px; letter-spacing: 2.2px; margin: 0 0 8px }
+    .lock-title { margin: 0; font-size: clamp(25px,4vw,32px); line-height: 1.5; font-weight: 650; letter-spacing: -.8px }
+    .lock-title span { color: #ad7089 }
+    .lock-subtitle { max-width: 310px; color: var(--muted); font-size: 11px; margin: 4px 0 14px }
+    .love-art {
+      width: 116px; height: 116px; border-radius: 31px; margin: 0 auto 15px;
+      display: grid; place-items: center; position: relative; overflow: hidden;
+      background: linear-gradient(150deg,#fff9,#f2dfe9a6);
+      border: 1px solid #fff; box-shadow: 0 12px 30px #7772a11c,inset 0 1px #fff;
+    }
+    .lock-copy .love-art { display: none }
+    .love-art:before,.love-art:after { content: ""; position: absolute; border-radius: 50%; border: 1px solid #bb93ab38; width: 138px; height: 66px; transform: rotate(-32deg) }
+    .love-art:after { width: 130px; height: 85px; transform: rotate(38deg); border-color: #9da8ce49 }
+    .love-art svg { width: 76px; height: 76px; position: relative; z-index: 1; filter: drop-shadow(0 6px 9px #98759a2c); animation: float 4s ease-in-out infinite }
+    .pin-label { color: #55576e; font-size: 10px; font-weight: 600; margin: 3px 0 8px }
+    .pin-dots { height: 20px; display: flex; justify-content: center; gap: 12px; margin: 0 0 10px }
+    .pin-dots i { width: 9px; height: 9px; margin-top: 5px; background: #d3d1df; border-radius: 50%; transition: transform .22s ease,background .22s,box-shadow .22s }
+    .pin-dots i.filled { transform: scale(1.17); background: #7772b4; box-shadow: 0 0 0 4px #7772b41b }
+    .pin-input { position: absolute !important; width: 1px !important; height: 1px !important; opacity: .01 !important; pointer-events: none !important; padding: 0 !important; border: 0 !important }
+    .keypad { width: 208px; display: grid; grid-template-columns: repeat(3,1fr); gap: 7px }
+    .keypad button {
+      height: 42px; border: 1px solid #fff9; border-radius: 14px;
+      background: rgba(255,255,255,.58); color: #38394d;
+      box-shadow: 0 3px 10px #5552760b,inset 0 1px #fff;
+      font-size: 14px; transition: transform .2s,background .2s,box-shadow .2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .keypad button:hover { transform: translateY(-2px); background: #fff9; box-shadow: 0 8px 18px #55527616,inset 0 1px #fff }
+    .keypad button:active { transform: scale(.93) }
+    .keypad .key-clear { color: #85839a; font-size: 9px }
+    .keypad .key-enter { background: linear-gradient(145deg,#a49cbd,#837d9f); color: white; font-size: 18px; box-shadow: 0 7px 17px #7972ae30 }
+    .lock-error { min-height: 19px; margin: 6px 0 0; color: #a44f6b; font-size: 10px }
+    .lock-art-panel { position: relative; min-height: 168px; display: grid; grid-row: 1; place-items: center; overflow: hidden; background: linear-gradient(155deg,#ecebf3b8,#f2e7ecbd 62%,#e7eaf3c7) }
+    .lock-art-panel:before { content:""; position:absolute; width:150px; aspect-ratio:1; border-radius:50%; background:linear-gradient(145deg,#fff9,#ffffff16); box-shadow:0 20px 70px #8580a11a,inset 1px 2px 3px #fff; animation:float 7s ease-in-out infinite }
+    .lock-art-panel:after { content:""; position:absolute; width:190px; aspect-ratio:1; border:1px solid #fff9; border-radius:50%; transform:rotate(-25deg) scaleY(.63) }
+    .art-label { position: absolute; top: 17px; right: 20px; z-index: 2; color: #74718a; font-size: 8px; letter-spacing: 1.5px }
+    .art-bottom-label { display:none }
+    .art-bottom-label span { display: block; color: #8b87a4; font-size: 8px; letter-spacing: 1.5px; direction: ltr }
+    .couple-illustration { position: relative; z-index: 1; width: 176px; height: 153px; filter: drop-shadow(0 18px 22px #77719a12); animation: float 5s ease-in-out infinite }
+    .lock-footnote { position: absolute; bottom: 24px; text-align: center; color: #85849a; font-size: 9px }
+
+    /* After unlocking: three anonymous choices and a shared day counter. */
+    .app-shell { width: min(1050px,100%); min-height: 100svh; margin: auto; padding: 0 clamp(16px,4vw,45px) 25px; animation: app-arrive .8s cubic-bezier(.2,.8,.2,1) both }
+    .topbar { height: 77px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #fff9; gap: 14px }
+    .wordmark { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none }
+    .wordmark-icon { width: 37px; height: 37px; display: grid; place-items: center; border-radius: 13px; color: #fff; font-size: 15px; background: linear-gradient(145deg,#a39bcc,#7672ad); box-shadow: 0 6px 17px #7f79b33d }
+    .wordmark-copy { font-size: 11px; font-weight: 650; line-height: 1.45 }
+    .wordmark-copy small { display: block; color: #86859a; font-size: 8px; font-weight: 500; letter-spacing: 1.1px }
+    .days-pill { display: flex; align-items: center; gap: 9px; border: 1px solid #fff; border-radius: 17px; padding: 7px 12px; color: #5b5c72; background: #ffffff52; box-shadow: 0 5px 16px #7772a10b,inset 0 1px #fff; font-size: 9px }
+    .days-pill .days-spark { color: #b17691; font-size: 13px }
+    .days-pill strong { color: var(--ink); font-size: 15px; font-weight: 700 }
+    .days-pill small { color: #87869b; font-size: 8px }
+    .music-player { width:min(270px,100%);margin:13px 0 -17px auto;padding:8px 11px;display:flex;align-items:center;gap:10px;border:1px solid #fff9;border-radius:17px;background:linear-gradient(145deg,#ffffffad,#ffffff61);box-shadow:0 8px 23px #69678610,inset 0 1px #fff;backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3) }
+    .music-toggle { flex:none;width:36px;height:36px;display:grid;place-items:center;border:1px solid #fff;border-radius:13px;background:linear-gradient(145deg,#fff,#eeeaf3);color:#9e7995;font-size:17px;box-shadow:inset 0 1px #fff,0 5px 13px #7772a114;transition:transform .22s,box-shadow .22s }
+    .music-toggle:hover { transform:translateY(-2px);box-shadow:0 8px 17px #7772a11c,inset 0 1px #fff }
+    .music-toggle:active { transform:scale(.94) }
+    .music-player.is-playing .music-toggle span { animation:music-note 1.7s ease-in-out infinite }
+    .music-next { flex:none;width:33px;height:33px;display:grid;place-items:center;border:1px solid #fff;border-radius:12px;background:linear-gradient(145deg,#fff,#eeeaf3);color:#9e7995;font-size:15px;box-shadow:inset 0 1px #fff,0 5px 13px #7772a114;transition:transform .22s }
+    .music-next:hover { transform:translateY(-2px) }
+    .music-copy { min-width:0;display:grid;gap:1px }
+    .music-copy strong { color:#55546a;font-size:9px;font-weight:650 }
+    .music-copy span { overflow:hidden;color:#89879b;font-size:8px;text-overflow:ellipsis;white-space:nowrap }
+    .music-player audio { display:none }
+    .home-wrap { width: min(850px,100%); margin: clamp(32px,8vh,75px) auto 0; text-align: center }
+    .welcome-greeting { display: flex; align-items: center; justify-content: center; gap: 8px; color: #838198; font-size: 10px; margin: 0 0 8px }
+    .welcome-greeting i { width: 22px; height: 1px; background: #c3bfd5 }
+    .home-title { margin: 0; font-size: clamp(26px,4vw,39px); letter-spacing: -.8px; font-weight: 650; line-height: 1.5 }
+    .home-title span { color: #a66e88 }
+    .home-subtitle { margin: 5px auto 28px; color: #77788d; font-size: 11px }
+    .memory-count { display: inline-flex; align-items: center; gap: 7px; color: #7f7d93; font-size: 8px; letter-spacing: 1.2px; direction: ltr; margin-bottom: 13px }
+    .memory-count:before,.memory-count:after { content: ""; width: 24px; height: 1px; background: #c9c6d6 }
+    .choice-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 15px }
+    .choice-card {
+      position: relative; min-height: 210px; padding: 20px 14px;
+      overflow: hidden; border-radius: 25px; border: 1px solid #fff;
+      background: linear-gradient(145deg,rgba(255,255,255,.68),rgba(255,255,255,.32));
+      box-shadow: 0 14px 40px #69678615,inset 0 1px #fff;
+      backdrop-filter: blur(25px) saturate(1.35); -webkit-backdrop-filter: blur(25px) saturate(1.35);
+      transition: transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s;
+    }
+    .choice-card:before { content:""; position:absolute; width:130px;height:130px;right:-33px;top:-62px;border-radius:50%;background:#fff5;filter:blur(3px) }
+    .choice-card:after { content:""; position:absolute; inset:1px;border-radius:24px;border:1px solid #fff5;pointer-events:none }
+    .choice-card:hover { transform: translateY(-7px) scale(1.018); box-shadow: 0 24px 46px #69678627,inset 0 1px #fff; border-color:#fff }
+    .choice-card:active { transform: translateY(-2px) scale(.99) }
+    .choice-orbit { width: 75px; height: 75px; margin: 6px auto 14px; border-radius: 50%; border: 1px solid #9793b544; display: grid; place-items: center; position: relative; color: #7772ad; font-size: 23px; background: linear-gradient(145deg,#ffffff73,#dfdeef50); box-shadow: inset 0 1px #fff }
+    .choice-orbit:before,.choice-orbit:after { content:""; position:absolute; width:91px;height:34px;border:1px solid #b5a0b142;border-radius:50%;transform:rotate(-35deg) }
+    .choice-orbit:after { transform:rotate(38deg);border-color:#9ca4ce4a }
+    .choice-prompt { position: relative; z-index: 1; font-size: 13px; font-weight: 600; margin: 0 }
+    .choice-hint { display:block;position:relative;z-index:1;margin-top:5px;color:#9290a2;font-size:8px }
+    .choice-card:nth-child(2) .choice-orbit { color:#b47b92;border-color:#c49aaa55 }
+    .choice-card:nth-child(3) .choice-orbit { color:#727ca6;border-color:#929cb855 }
+    .home-caption { margin: 22px 0 0; color: #9492a3; font-size: 9px }
+    .home-caption span { color: #b87994; padding: 0 4px }
+    .game-invitation { width:min(440px,100%);margin:38px auto 0;padding:17px 19px;display:grid;grid-template-columns:52px 1fr auto;align-items:center;gap:12px;border:1px solid #fff9;border-radius:22px;background:linear-gradient(145deg,#ffffff8a,#ffffff4a);box-shadow:0 12px 35px #69678612,inset 0 1px #fff;backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);text-align:right }
+    .game-invitation-icon { width:48px;height:48px;display:grid;place-items:center;border:1px solid #fff;border-radius:17px;background:linear-gradient(145deg,#fff,#eee8f3);color:#ab7995;font-size:21px;box-shadow:0 7px 18px #7772a114,inset 0 1px #fff;animation:float 4s ease-in-out infinite }
+    .game-invitation-copy strong { display:block;color:#444357;font-size:11px;font-weight:650 }
+    .game-invitation-copy span { display:block;margin-top:3px;color:#89879b;font-size:8px }
+    .game-open-button { min-height:36px;padding:0 13px;border:1px solid #fff;border-radius:12px;background:linear-gradient(145deg,#a49cbd,#837d9f);color:#fff;font-size:9px;white-space:nowrap;box-shadow:0 6px 15px #7973ad20;transition:transform .2s,box-shadow .2s }
+    .game-open-button:hover { transform:translateY(-2px);box-shadow:0 9px 18px #7973ad30 }
+
+    /* The three private chapters. */
+    .chapter { display: none; width: min(720px,100%); margin: clamp(26px,7vh,65px) auto 0; animation: chapter-arrive .45s cubic-bezier(.2,.8,.2,1) both }
+    .chapter.active { display: block }
+    .game-chapter { width:min(640px,100%) }
+    .chapter-back { border: 0; padding: 7px 0; margin-bottom: 16px; background: none; color: #77778c; font-size: 10px; transition: color .2s,transform .2s }
+    .chapter-back:hover { color: #4a4960; transform: translateX(3px) }
+    .chapter-card { padding: clamp(23px,5vw,42px); border-radius: 28px; position: relative; overflow: hidden }
+    .chapter-card:before { content:"";position:absolute;width:220px;height:220px;border-radius:50%;top:-140px;left:-80px;background:#fff8;filter:blur(18px);pointer-events:none }
+    .chapter-kicker { position: relative; display:flex;align-items:center;gap:8px;color:#88869d;font-size:8px;letter-spacing:1.6px;margin:0 0 8px }
+    .chapter-kicker span { width:6px;height:6px;background:#b67d98;border-radius:50% }
+    .chapter-title { position:relative;margin:0;font-size:clamp(23px,4vw,32px);font-weight:650;line-height:1.5 }
+    .chapter-intro { position:relative;color:#77788d;font-size:10px;margin:3px 0 20px }
+    .dear-note { position:relative;padding:clamp(18px,4vw,32px);border:1px solid #fff9;border-radius:20px;background:linear-gradient(145deg,#ffffff8a,#ffffff4a);box-shadow:inset 0 1px #fff,0 8px 24px #6c688815 }
+    .dear-note p { margin:0;color:#494b61;font-size:clamp(13px,2vw,15px);line-height:2.25 }
+    .dear-note p+p { margin-top:12px }
+    .note-signature { color:#a66e88!important;font-weight:650 }
+    .chapter-bottom { display:flex;justify-content:space-between;align-items:center;margin-top:16px;color:#89879b;font-size:8px }
+    .chapter-bottom span:last-child { color:#a56f88;font-size:12px }
+    .message-composer { position:relative;display:grid;gap:9px;margin-top:17px }
+    .message-composer textarea { width:100%;min-height:84px;resize:vertical;border:1px solid #fff;border-radius:15px;padding:12px 14px;background:#ffffff69;color:var(--ink);font-size:10px;box-shadow:inset 0 1px #fff }
+    .composer-row { display:flex;justify-content:space-between;align-items:center;gap:9px }
+    .composer-row select { min-height:35px;max-width:150px;padding:0 9px;border:1px solid #fff;border-radius:12px;background:#ffffff70;color:#63647a;font-size:9px }
+    .send-button { border:1px solid #fff;border-radius:12px;padding:8px 14px;background:linear-gradient(145deg,#8e87bf,#726da8);color:#fff;font-size:9px;box-shadow:0 6px 15px #7973ad32;transition:transform .2s }
+    .send-button:hover { transform:translateY(-2px) }
+    .message-list { display:grid;gap:9px;margin-top:16px }
+    .message-item { position:relative;padding:14px 16px;border:1px solid #fff;border-radius:16px;background:#ffffff66;box-shadow:inset 0 1px #fff;animation:chapter-arrive .35s ease both }
+    .message-meta { display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:5px;color:#9693a7;font-size:8px }
+    .message-meta strong { color:#a27188;font-size:9px;font-weight:650 }
+    .message-item p { margin:0;color:#505166;font-size:11px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere }
+    .delete-message { border:0;background:none;color:#a6a2b3;font-size:14px;padding:0 5px }
+    .delete-message:hover { color:#a14d68 }
+    .empty-messages { border:1px dashed #c2bfd1;border-radius:16px;padding:22px;text-align:center;color:#89879b;font-size:10px }
+    .game-shell { position:relative;padding:clamp(20px,5vw,36px);border:1px solid #fff9;border-radius:24px;background:linear-gradient(145deg,#ffffff9c,#ffffff52);box-shadow:inset 0 1px #fff,0 12px 32px #6c688815;overflow:hidden }
+    .game-shell:before { content:"";position:absolute;inset:1px 35% auto;height:1px;background:linear-gradient(90deg,transparent,#fff,transparent);pointer-events:none }
+    .game-status-row { display:flex;justify-content:center;gap:9px;margin:17px 0 }
+    .game-stat { min-width:105px;padding:8px 12px;border:1px solid #fff;border-radius:14px;background:#ffffff75;text-align:center;box-shadow:inset 0 1px #fff }
+    .game-stat strong { display:block;color:#615b78;font-size:17px;line-height:1.25;font-weight:650 }
+    .game-stat span { display:block;margin-top:2px;color:#9290a2;font-size:8px }
+    .game-board { width:min(330px,100%);margin:20px auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;perspective:700px }
+    .game-tile { position:relative;min-width:0;aspect-ratio:1/1;border:1px solid #fff;border-radius:19px;background:linear-gradient(145deg,#ffffffc7,#e9e6f2a8);color:#817a9c;box-shadow:0 8px 20px #68647f15,inset 0 1px #fff;font-size:27px;transition:transform .35s cubic-bezier(.2,.8,.2,1),background .25s,box-shadow .25s,color .25s;transform-style:preserve-3d;-webkit-tap-highlight-color:transparent }
+    .game-tile:hover:not(.revealed):not(.matched) { transform:translateY(-3px) rotate(-2deg);box-shadow:0 13px 22px #68647f22,inset 0 1px #fff }
+    .game-tile:active { transform:scale(.96) }
+    .game-tile.revealed,.game-tile.matched { color:#a66e88;background:linear-gradient(145deg,#fff,#f8e9ef);box-shadow:0 8px 22px #b47b9225,inset 0 1px #fff }
+    .game-tile.matched { border-color:#e8ceda;animation:match-glow .55s ease }
+    .game-tile-symbol { display:block;opacity:0;transform:scale(.55) rotate(-12deg);transition:opacity .2s,transform .28s cubic-bezier(.2,.8,.2,1) }
+    .game-tile.revealed .game-tile-symbol,.game-tile.matched .game-tile-symbol { opacity:1;transform:scale(1) rotate(0) }
+    .game-hint { min-height:22px;margin:0 auto;text-align:center;color:#838195;font-size:10px }
+    .game-result { margin:17px auto 0;padding:17px;border:1px solid #fff;border-radius:18px;background:linear-gradient(145deg,#fff9,#fff6);box-shadow:inset 0 1px #fff;text-align:center;animation:card-arrive .45s ease both }
+    .game-result-mark { display:block;margin-bottom:4px;color:#b47b92;font-size:21px }
+    .game-result strong { display:block;color:#504b66;font-size:15px;font-weight:650 }
+    .game-result p { margin:5px 0 0;color:#838195;font-size:10px;line-height:1.8 }
+    .game-controls { display:flex;justify-content:center;margin-top:14px }
+    .game-reset { min-height:37px;padding:0 16px;border:1px solid #fff;border-radius:13px;background:#ffffff82;color:#706b85;font-size:9px;box-shadow:inset 0 1px #fff;transition:transform .2s,background .2s }
+    .game-reset:hover { transform:translateY(-2px);background:#fff }
+    .messages-gate { position:relative;max-width:390px;margin:24px auto 8px;padding:clamp(20px,4vw,30px);border:1px solid #fff;border-radius:22px;background:linear-gradient(145deg,#ffffff9c,#ffffff54);box-shadow:inset 0 1px #fff,0 12px 30px #6c688815;text-align:center }
+    .messages-gate-mark { width:48px;height:48px;margin:0 auto 12px;border:1px solid #fff;border-radius:17px;display:grid;place-items:center;background:linear-gradient(145deg,#fff,#eeeaf3);color:#9e7995;font-size:20px;box-shadow:0 7px 18px #7772a114,inset 0 1px #fff }
+    .messages-gate h3 { margin:0;color:#3e3d50;font-size:17px;font-weight:650 }
+    .messages-gate p { margin:5px 0 15px;color:#838195;font-size:10px }
+    .messages-password-form { display:flex;gap:8px }
+    .messages-password-form input { width:100%;min-width:0;height:40px;padding:0 12px;border:1px solid #fff;border-radius:13px;background:#ffffffa8;color:var(--ink);font-size:12px;box-shadow:inset 0 1px #fff }
+    .messages-password-form button { flex:none;border:1px solid #fff;border-radius:13px;padding:0 15px;background:linear-gradient(145deg,#a49cbd,#837d9f);color:#fff;font-size:10px;box-shadow:0 6px 15px #7973ad20 }
+    .messages-gate-error { min-height:18px;margin:9px 0 0!important;color:#a44f6b!important;font-size:10px!important }
+    .messages-content { position:relative }
+    .memory-gallery { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin:18px 0 }
+    .memory-photo { min-width:0;padding:7px;border:1px solid #fff;border-radius:17px;background:#ffffff70;box-shadow:inset 0 1px #fff,0 7px 20px #6c688810;text-align:right;transition:transform .25s,box-shadow .25s }
+    .memory-photo:hover { transform:translateY(-3px);box-shadow:0 13px 25px #6c68881c,inset 0 1px #fff }
+    .memory-photo img { display:block;width:100%;height:150px;object-fit:cover;border-radius:11px;background:#ebeaf1 }
+    .memory-photo span { display:block;padding:7px 4px 2px;color:#68677c;font-size:9px }
+    .photo-viewer { width:min(720px,calc(100% - 28px));max-height:90vh;padding:14px;border:1px solid #fff;border-radius:20px;background:#f5f2f7eF;color:var(--ink);box-shadow:0 25px 80px #29263845 }
+    .photo-viewer::backdrop { background:#24213186;backdrop-filter:blur(8px) }
+    .photo-viewer img { display:block;max-width:100%;max-height:75vh;margin:auto;border-radius:12px;object-fit:contain }
+    .photo-viewer p { margin:9px 0 0;text-align:center;color:#68677c;font-size:10px }
+    .photo-viewer-close { display:block;margin:0 0 9px auto;width:32px;height:32px;border:1px solid #fff;border-radius:50%;background:#ffffffb8;color:#69677a;font-size:20px;line-height:1 }
+    .page-footer { margin:45px auto 0;text-align:center;color:#9693a6;font-size:8px }
+    .page-footer span { color:#b57993 }
+    .toast { position:fixed;z-index:20;top:17px;left:50%;transform:translate(-50%,-10px);padding:9px 14px;border:1px solid #fff;border-radius:13px;background:#fffffff0;color:#4e4f65;font-size:10px;box-shadow:0 8px 28px #5d5a7924;opacity:0;pointer-events:none;transition:.25s;backdrop-filter:blur(15px) }
+    .toast.show { opacity:1;transform:translate(-50%,0) }
+    @keyframes float { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-7px) } }
+    @keyframes drift { to { transform:translate(6vw,5vh) scale(1.08) } }
+    @keyframes twinkle { to { opacity:.35;transform:scale(.7) } }
+    @keyframes card-arrive { from { opacity:0;transform:translateY(16px) scale(.985) } to { opacity:1;transform:translateY(0) scale(1) } }
+    @keyframes app-arrive { from { opacity:0;transform:scale(.985);filter:blur(5px) } to { opacity:1;transform:scale(1);filter:blur(0) } }
+    @keyframes chapter-arrive { from { opacity:0;transform:translateY(9px) } to { opacity:1;transform:translateY(0) } }
+    @keyframes match-glow { 50% { transform:scale(1.05);box-shadow:0 0 0 5px #d8b7c633,0 10px 24px #b47b922c } }
+    @keyframes music-note { 0%,100% { transform:translateY(0) rotate(0) } 50% { transform:translateY(-2px) rotate(7deg) } }
+    @media(max-width:720px) {
+      .lock-screen { padding:68px 17px 58px }
+      .lock-topline { top:17px;right:17px;left:17px }
+      .lock-card { width:min(440px,100%);min-height:0;grid-template-columns:1fr;border-radius:28px }
+      .lock-copy { padding:27px 19px 22px }
+      .lock-title { font-size:29px }
+      .lock-subtitle { font-size:10px;margin-bottom:12px }
+      .love-art { width:86px;height:86px;border-radius:25px;margin-bottom:11px }
+      .love-art svg { width:61px;height:61px }
+      .lock-art-panel { min-height:175px;grid-row:1 }
+      .lock-art-panel:before { width:165px }
+      .lock-art-panel:after { width:185px }
+      .art-label { top:16px;right:18px }
+      .art-bottom-label { bottom:12px;font-size:8px }
+      .couple-illustration { width:170px;height:145px }
+      .lock-footnote { bottom:16px }
+      .keypad { width:204px;gap:6px }
+      .keypad button { height:36px;border-radius:12px }
+      .app-shell { padding-inline:15px }
+      .topbar { height:65px }
+      .wordmark-icon { width:33px;height:33px;border-radius:11px }
+      .wordmark-copy { font-size:10px }
+      .days-pill { gap:6px;padding:6px 9px;border-radius:14px }
+      .days-pill strong { font-size:13px }
+      .days-pill small { display:none }
+      .music-player { margin:10px 0 -14px auto;padding:6px 9px;border-radius:15px }
+      .music-toggle { width:33px;height:33px;border-radius:12px }
+      .music-next { width:31px;height:31px }
+      .home-wrap { margin-top:42px }
+      .home-subtitle { margin-bottom:22px }
+      .choice-grid { gap:9px }
+      .choice-card { min-height:158px;padding:14px 7px;border-radius:20px }
+      .choice-card:after { border-radius:19px }
+      .choice-orbit { width:61px;height:61px;margin:5px auto 12px;font-size:19px }
+      .choice-orbit:before { width:74px;height:28px }
+      .choice-orbit:after { width:73px;height:43px }
+      .choice-prompt { font-size:10px }
+      .choice-hint { font-size:7px }
+      .chapter { margin-top:29px }
+      .chapter-card { border-radius:23px }
+      .dear-note { border-radius:17px }
+      .game-invitation { grid-template-columns:42px 1fr;gap:9px;margin-top:28px;padding:13px;border-radius:19px }
+      .game-invitation-icon { width:40px;height:40px;border-radius:14px;font-size:18px }
+      .game-open-button { grid-column:1/-1;width:100% }
+      .game-shell { border-radius:20px }
+      .game-board { gap:8px }
+      .game-tile { border-radius:16px;font-size:24px }
+      .game-status-row { gap:7px }
+      .game-stat { min-width:96px;padding:7px 9px }
+      .memory-photo img { height:130px }
+      .page-footer { margin-top:30px }
+    }
+    @media(max-width:390px) {
+      .lock-screen { padding-inline:12px }
+      .lock-topline { font-size:8px }
+      .lock-topline span:last-child { font-size:7px }
+      .lock-art-panel { min-height:150px }
+      .lock-copy { padding:21px 14px 17px }
+      .home-wrap { margin-top:29px }
+      .home-title { font-size:25px }
+      .choice-grid { gap:7px }
+      .choice-card { min-height:145px;padding:12px 5px }
+      .choice-orbit { width:53px;height:53px }
+      .choice-prompt { font-size:9px }
+      .game-board { gap:7px }
+      .game-tile { border-radius:14px;font-size:22px }
+    }
+    @media(max-width:390px) {
+      .memory-gallery { gap:8px }
+      .memory-photo img { height:112px }
+      .messages-password-form { flex-direction:column }
+      .messages-password-form button { min-height:38px }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      *,*::before,*::after { scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important }
+    }
+    .glass {
+      background: linear-gradient(145deg,rgba(36,39,58,.88),rgba(22,25,40,.75));
+      border-color:rgba(231,225,255,.12);
+      box-shadow:0 28px 80px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.09);
+    }
+    .blur-orb { opacity:.28;filter:blur(100px) }
+    .star { background:#eee4ff;box-shadow:0 0 12px 3px #cbb8ff55 }
+    .lock-screen { padding-block:80px }
+    .lock-topline { color:#9291a6 }
+    .lock-topline b { color:#e7e5f0 }
+    .lock-card { width:min(430px,100%);border-radius:34px;background:linear-gradient(145deg,rgba(33,36,55,.94),rgba(17,20,34,.91));border-color:#e5dcff1c;box-shadow:0 35px 100px #0007,inset 0 1px #ffffff18 }
+    .lock-copy { padding:27px clamp(20px,5vw,36px) 28px }
+    .lock-kicker { color:#a59fba;letter-spacing:2.5px }
+    .lock-title { color:#f3f0fa;font-size:clamp(25px,4vw,31px);line-height:1.55 }
+    .lock-title span { color:#e1aec3 }
+    .lock-subtitle { color:#aaa9bd;line-height:1.9 }
+    .lock-art-panel { min-height:158px;background:radial-gradient(circle at 50% 44%,#3b3a5a,#22253a 53%,#191d2c) }
+    .lock-art-panel:before { width:128px;background:linear-gradient(145deg,#77729455,#e4bad51c);box-shadow:0 20px 70px #08091180,inset 1px 2px 3px #ffffff35 }
+    .lock-art-panel:after { width:178px;border-color:#fff2 }
+    .couple-illustration { filter:drop-shadow(0 18px 22px #090a16a0) }
+    .art-label { color:#c2b9d1;letter-spacing:1.7px }
+    .lock-footnote { color:#918fa5 }
+    .pin-label { color:#d5d0e2;font-weight:550 }
+    .pin-dots i { background:#45465c }
+    .pin-dots i.filled { background:#e2afc6;box-shadow:0 0 0 4px #e2afc622 }
+    .keypad button { color:#ece9f4;background:linear-gradient(145deg,#34374eab,#24283cbf);border-color:#ffffff17;box-shadow:0 5px 15px #0002,inset 0 1px #ffffff11 }
+    .keypad button:hover { background:#44465dcc;box-shadow:0 9px 22px #0003,inset 0 1px #ffffff1a }
+    .keypad .key-clear { color:#aaa6ba }
+    .keypad .key-enter { background:linear-gradient(145deg,#b77e9c,#886a95);color:#fff;box-shadow:0 8px 20px #9f6f9640 }
+    .lock-error { color:#f0a8bd }
+    .app-shell { color:#eeedf6 }
+    .topbar { border-bottom-color:#ffffff13 }
+    .wordmark { color:#eeedf6 }
+    .wordmark-icon { background:linear-gradient(145deg,#ae7898,#716e9e);box-shadow:0 7px 22px #80618c40 }
+    .wordmark-copy small { color:#9e9bad }
+    .days-pill { color:#d2cedf;background:#24283abf;border-color:#ffffff17;box-shadow:0 6px 20px #0002,inset 0 1px #ffffff0d }
+    .days-pill .days-spark,.page-footer span,.home-caption span { color:#e2a8c0 }
+    .days-pill strong { color:#faf8ff }
+    .days-pill small { color:#a4a1b3 }
+    .music-player { background:linear-gradient(145deg,#25283bdc,#1b1f31d9);border-color:#ffffff17;box-shadow:0 10px 30px #0003,inset 0 1px #ffffff12 }
+    .music-toggle { color:#edc0d2;background:linear-gradient(145deg,#34364f,#25283d);border-color:#ffffff17;box-shadow:0 6px 17px #0003,inset 0 1px #ffffff13 }
+    .music-next { color:#edc0d2;background:linear-gradient(145deg,#34364f,#25283d);border-color:#ffffff17 }
+    .music-copy strong { color:#eeeaf5 }
+    .music-copy span { color:#a5a1b3 }
+    .welcome-greeting,.home-subtitle,.home-caption,.memory-count,.page-footer { color:#a4a1b4 }
+    .welcome-greeting i,.memory-count:before,.memory-count:after { background:#646176 }
+    .home-title { color:#f3f0fa }
+    .home-title span { color:#e2a8c0 }
+    .choice-card { background:linear-gradient(145deg,rgba(39,42,61,.87),rgba(25,28,44,.78));border-color:#ffffff17;box-shadow:0 17px 45px #0003,inset 0 1px #ffffff12 }
+    .choice-card:before { background:#fff1 }
+    .choice-card:after { border-color:#ffffff10 }
+    .choice-card:hover { border-color:#ffffff26;box-shadow:0 26px 52px #0005,inset 0 1px #ffffff16 }
+    .choice-orbit { color:#d2bee8;background:linear-gradient(145deg,#42405b,#292d45);border-color:#e6d7f344;box-shadow:inset 0 1px #ffffff15 }
+    .choice-orbit:before { border-color:#e2c7dc35 }
+    .choice-orbit:after { border-color:#b9c9ed3d }
+    .choice-prompt { color:#f0edf7 }
+    .choice-hint { color:#aaa7b8 }
+    .choice-card:nth-child(2) .choice-orbit { color:#edb3cb;border-color:#e8a9c453 }
+    .choice-card:nth-child(3) .choice-orbit { color:#c0c8ec;border-color:#aab8e050 }
+    .game-invitation { background:linear-gradient(145deg,#282b40e8,#1b1f31df);border-color:#ffffff17;box-shadow:0 15px 40px #0003,inset 0 1px #ffffff12 }
+    .game-invitation-icon { color:#efbdd2;background:linear-gradient(145deg,#39394f,#25283d);border-color:#ffffff15;box-shadow:0 8px 20px #0003,inset 0 1px #ffffff12 }
+    .game-invitation-copy strong { color:#f0edf7 }
+    .game-invitation-copy span { color:#a6a2b5 }
+    .game-open-button,.send-button,.messages-password-form button { background:linear-gradient(145deg,#a87898,#766d99);border-color:#ffffff1a;color:#fff;box-shadow:0 8px 20px #0003 }
+    .chapter-back { color:#aaa7b8 }
+    .chapter-back:hover { color:#f0d7e4 }
+    .chapter-card:before { background:#d9d4f113 }
+    .chapter-kicker { color:#aaa7ba }
+    .chapter-kicker span { background:#dfa7c0;box-shadow:0 0 12px #dfa7c055 }
+    .chapter-title { color:#f2eff8 }
+    .chapter-intro { color:#aaa8ba }
+    .dear-note { background:linear-gradient(145deg,#292c41d9,#202338cc);border-color:#ffffff16;box-shadow:inset 0 1px #ffffff10,0 12px 28px #0002 }
+    .dear-note p { color:#d6d2e1 }
+    .note-signature { color:#e6abc3!important }
+    .chapter-bottom { color:#a5a1b4 }
+    .chapter-bottom span:last-child { color:#e2a8c0 }
+    .messages-gate { background:linear-gradient(145deg,#292c41e8,#1d2134e0);border-color:#ffffff17;box-shadow:0 15px 36px #0003,inset 0 1px #ffffff12 }
+    .messages-gate-mark { color:#edb9cd;background:linear-gradient(145deg,#39394f,#25283d);border-color:#ffffff17;box-shadow:0 8px 20px #0003,inset 0 1px #ffffff12 }
+    .messages-gate h3 { color:#f1eef7 }
+    .messages-gate p { color:#aaa7b8 }
+    .messages-password-form input,.message-composer textarea,.composer-row select { color:#eeeaf5;background:#171a2bd9;border-color:#ffffff19;box-shadow:inset 0 1px #ffffff0b }
+    .messages-password-form input::placeholder,.message-composer textarea::placeholder { color:#89869b }
+    .message-item { background:#25283bd1;border-color:#ffffff18;box-shadow:inset 0 1px #ffffff10 }
+    .message-meta { color:#a8a4b7 }
+    .message-meta strong { color:#e8b3c8 }
+    .message-item p { color:#ddd9e8 }
+    .delete-message { color:#c0bbcc }
+    .delete-message:hover { color:#f2a9bf }
+    .empty-messages { color:#bbb6c7;border-color:#777187 }
+    .game-shell { background:linear-gradient(145deg,#282b40de,#1c2033d9);border-color:#ffffff17;box-shadow:0 15px 38px #0003,inset 0 1px #ffffff12 }
+    .game-shell:before { background:linear-gradient(90deg,transparent,#ffffff48,transparent) }
+    .game-stat { background:#171b2bd9;border-color:#ffffff16;box-shadow:inset 0 1px #ffffff0a }
+    .game-stat strong { color:#f2ddea }
+    .game-stat span,.game-hint { color:#aaa7b8 }
+    .game-tile { color:#d2bfdc;background:linear-gradient(145deg,#33364d,#22263a);border-color:#ffffff17;box-shadow:0 9px 22px #0003,inset 0 1px #ffffff12 }
+    .game-tile:hover:not(.revealed):not(.matched) { box-shadow:0 14px 26px #0004,inset 0 1px #ffffff18 }
+    .game-tile.revealed,.game-tile.matched { color:#f1bfd3;background:linear-gradient(145deg,#433448,#30283b);box-shadow:0 9px 24px #0004,inset 0 1px #ffffff12 }
+    .game-tile.matched { border-color:#d994b155 }
+    .game-result { background:linear-gradient(145deg,#332b40e8,#27243ae0);border-color:#ffffff18;box-shadow:inset 0 1px #ffffff11 }
+    .game-result-mark { color:#f0adc7 }
+    .game-result strong { color:#f4e9f1 }
+    .game-result p { color:#c1bdce }
+    .game-reset { color:#dbd6e5;background:#2c3046;border-color:#ffffff18;box-shadow:inset 0 1px #ffffff10 }
+    .game-reset:hover { background:#393c53 }
+    .memory-photo { background:#24283bd9;border-color:#ffffff18;box-shadow:inset 0 1px #ffffff10,0 9px 23px #0003 }
+    .memory-photo:hover { box-shadow:0 15px 30px #0004,inset 0 1px #ffffff13 }
+    .memory-photo img { background:#191c2b }
+    .memory-photo span { color:#d4cfdf }
+    .photo-viewer { color:#eeeaf5;background:#202337f2;border-color:#ffffff20 }
+    .photo-viewer::backdrop { background:#070810c9 }
+    .photo-viewer p { color:#c7c2d3 }
+    .photo-viewer-close { color:#eeeaf5;background:#33364bdc;border-color:#ffffff19 }
+    .toast { color:#eeeaf5;background:#25283bf2;border-color:#ffffff1c;box-shadow:0 12px 32px #0005 }
+    .page-footer span { color:#e2a8c0 }
+    button:focus-visible,input:focus-visible,textarea:focus-visible { outline-color:#e5a9c2 }
+    @media(max-width:720px) {
+      .lock-screen { padding:76px 17px 58px }
+      .lock-card { width:min(430px,100%) }
+      .lock-art-panel { min-height:145px }
+      .couple-illustration { width:158px;height:138px }
+    }
+    .lock-screen { min-height:100svh;padding:clamp(84px,12vh,118px) clamp(18px,5vw,70px) 76px }
+    .lock-topline { top:30px;right:clamp(18px,6vw,84px);left:clamp(18px,6vw,84px);max-width:1040px;margin:auto }
+    .lock-brand { display:flex;align-items:center;gap:12px;color:#eeebf7;text-decoration:none;letter-spacing:1.4px;font-size:9px }
+    .lock-brand>span:last-child { display:grid;gap:3px }
+    .lock-brand small { color:#8d8ba2;font-size:7px;letter-spacing:2px }
+    .lock-brand-mark { width:39px;height:39px;display:flex;align-items:center;justify-content:center;white-space:nowrap;direction:ltr;position:relative;border:1px solid #fff2;border-radius:14px;background:linear-gradient(145deg,#ffffff13,#ffffff05);box-shadow:inset 0 1px #ffffff12;color:#f2d5e6;font-size:10px;letter-spacing:0 }
+    .lock-brand-mark span { padding:0 2px;color:#d998b6 }
+    .lock-private { display:flex;align-items:center;gap:8px;color:#a9a4b7;font-size:9px }
+    .lock-private i { width:6px;height:6px;border-radius:50%;background:#c78ba9;box-shadow:0 0 12px #d695b477 }
+    .lock-card { width:min(1000px,100%);min-height:570px;grid-template-columns:1.04fr .96fr;border-radius:34px;background:linear-gradient(145deg,#1d2032ec,#111522f2);border-color:#e5dcff1c;box-shadow:0 38px 110px #0008,inset 0 1px #ffffff16 }
+    .lock-copy { align-items:flex-start;padding:clamp(34px,6vw,64px);text-align:right }
+    .lock-kicker { display:flex;align-items:center;gap:10px;margin-bottom:20px;color:#a7a3b8;font-size:9px;letter-spacing:2px }
+    .lock-kicker span { width:25px;height:25px;display:grid;place-items:center;border:1px solid #e8c9da38;border-radius:9px;background:#d49ab714;color:#e3b2ca;font-size:8px;letter-spacing:0 }
+    .lock-title { font-size:clamp(31px,4.4vw,47px);line-height:1.45;letter-spacing:-1px }
+    .lock-title span { color:#e7b5cb;text-shadow:0 0 34px #cd88ad2b }
+    .lock-subtitle { max-width:345px;margin:12px 0 23px;color:#a9a7ba;font-size:12px;line-height:2 }
+    .lock-separator { width:100%;display:flex;align-items:center;gap:12px;margin:0 0 15px;color:#d99db8;font-size:11px }
+    .lock-separator i { height:1px;flex:1;background:linear-gradient(90deg,transparent,#ffffff20) }
+    .lock-separator i:last-child { background:linear-gradient(270deg,transparent,#ffffff20) }
+    .pin-label { color:#dbd6e5;font-size:10px;margin:0 0 11px }
+    .pin-display { width:100%;height:44px;display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:13px;border:1px solid #ffffff13;border-radius:14px;background:linear-gradient(145deg,#111422c9,#171a2ac9);box-shadow:inset 0 1px #ffffff08 }
+    .pin-display i { width:8px;height:8px;border-radius:50%;background:#514e64;transition:transform .22s,background .22s,box-shadow .22s }
+    .pin-display i.filled { transform:scale(1.2);background:#e8aeca;box-shadow:0 0 0 5px #df9fbd1b,0 0 16px #db9bb977 }
+    .keypad { width:100%;max-width:300px;gap:8px }
+    .keypad button { height:44px;border-radius:14px;background:linear-gradient(145deg,#2b2e43d9,#202338e8);border-color:#ffffff12;box-shadow:0 7px 17px #0002,inset 0 1px #ffffff0d;font-size:13px }
+    .keypad button:hover { transform:translateY(-2px);background:#36394fd9;box-shadow:0 10px 22px #0004,inset 0 1px #ffffff15 }
+    .keypad .key-clear { color:#b0adbf }
+    .keypad .key-enter { background:linear-gradient(145deg,#b77e9c,#806b9a);color:white;box-shadow:0 8px 22px #9f6f9640 }
+    .lock-error { min-height:19px;margin:7px 0 0;color:#eea8c1;font-size:10px }
+    .lock-signoff { margin:10px 0 0;color:#8f8ca2;font-size:9px }
+    .lock-signoff span { padding-inline-start:4px;color:#e5a9c2 }
+    .lock-footnote { bottom:25px;color:#9692a9;font-size:9px;letter-spacing:.3px }
+    .lock-footnote span { color:#e2a8c0 }
+    .lock-art-panel { min-height:100%;grid-row:auto;isolation:isolate;background:radial-gradient(ellipse at 48% 43%,#3b3552 0,#23273e 39%,#151a2a 78%);border-inline-start:1px solid #ffffff0d }
+    .lock-art-panel:before { width:min(72%,360px);background:radial-gradient(circle at 38% 30%,#eacde526,#a6b3e414 48%,#15172700 72%);box-shadow:0 0 105px #b58bb72b,inset 1px 2px 3px #ffffff09;animation:halo-breathe 7s ease-in-out infinite }
+    .lock-art-panel:after { width:min(81%,405px);border-color:#d6c6ed13;transform:rotate(-25deg) scaleY(.66) }
+    .art-label { top:27px;right:28px;color:#b9b2c9;font-size:8px;letter-spacing:2px }
+    .lock-constellation { width:min(100%,440px);aspect-ratio:1;display:grid;place-items:center;position:relative }
+    .moon-halo { width:76%;aspect-ratio:1;display:grid;place-items:center;position:relative;border:1px solid #e5c4db21;border-radius:50%;background:radial-gradient(circle at 44% 34%,#ffffff10,#ffffff00 64%);box-shadow:inset 0 0 45px #c9b0e00a,0 0 75px #c59ccc0a;animation:halo-breathe 8s ease-in-out infinite }
+    .moon-halo:before,.moon-halo:after { content:"";position:absolute;border:1px solid #dcb6d51a;border-radius:50%;inset:9%;transform:rotate(34deg) scaleY(.48) }
+    .moon-halo:after { inset:-10%;border-color:#c3caed12;transform:rotate(-33deg) scaleY(.5) }
+    .couple-illustration { width:78%;height:auto;filter:drop-shadow(0 15px 34px #e6b9db28);animation:float 6s ease-in-out infinite }
+    .constellation-star { position:absolute;z-index:2;color:#f3d9ea;text-shadow:0 0 18px #f4c9e7a3;font-size:18px;font-style:normal;animation:twinkle 3s ease-in-out infinite alternate }
+    .star-one { top:20%;right:19% }
+    .star-two { bottom:25%;left:17%;color:#c3d0f0;animation-delay:-1s }
+    .star-three { top:33%;left:17%;font-size:25px;animation-delay:-1.6s }
+    .star-four { bottom:18%;right:26%;font-size:25px;animation-delay:-.7s }
+    .art-caption { position:absolute;bottom:40px;z-index:2;display:grid;gap:5px;text-align:center;color:#aaa5ba;font-size:9px }
+    .art-caption strong { color:#e9dfed;font-size:12px;font-weight:550 }
+    .game-shell { padding:clamp(20px,5vw,36px) }
+    .story-progress { display:flex;justify-content:center;gap:8px;margin:2px 0 21px }
+    .story-progress i { width:24px;height:4px;border-radius:99px;background:#ffffff1a;transition:width .3s,background .3s,box-shadow .3s }
+    .story-progress i.current { width:40px;background:#df9fbd;box-shadow:0 0 14px #df9fbd66 }
+    .story-progress i.done { background:#b39ac8 }
+    .game-scene { position:relative;max-width:480px;margin:auto;padding:20px 10px 8px;text-align:center;animation:chapter-arrive .45s ease both }
+    .game-scene-icon { width:76px;height:76px;display:grid;place-items:center;margin:0 auto 13px;border:1px solid #e8d8f02b;border-radius:28px;background:radial-gradient(circle at 35% 25%,#f0cadf30,#a8b4e817 72%);box-shadow:0 15px 40px #d19dc51a,inset 0 1px #ffffff17;color:#f0c4dd;font-size:31px;animation:float 4.5s ease-in-out infinite }
+    .game-step-label { color:#c8a9c0;font-size:9px;letter-spacing:.6px }
+    .game-prompt { max-width:390px;margin:9px auto 4px;color:#f3eff7;font-size:clamp(18px,3vw,23px);font-weight:600;line-height:1.65 }
+    .game-whisper { margin:4px auto 20px;color:#aaa7b8;font-size:10px;line-height:1.8 }
+    .game-choices { display:grid;gap:10px;max-width:440px;margin:auto }
+    .game-choice { width:100%;display:grid;grid-template-columns:42px 1fr;grid-template-rows:auto auto;align-items:center;column-gap:11px;padding:13px 15px;border:1px solid #ffffff14;border-radius:17px;background:linear-gradient(145deg,#ffffff0c,#ffffff05);box-shadow:inset 0 1px #ffffff09;text-align:right;transition:transform .25s,border-color .25s,background .25s,box-shadow .25s;animation:chapter-arrive .4s ease both }
+    .game-choice:nth-child(2) { animation-delay:.08s }
+    .game-choice:hover { transform:translateY(-3px);border-color:#e8b8d13d;background:linear-gradient(145deg,#e7b6d01a,#ffffff08);box-shadow:0 12px 25px #0003,inset 0 1px #ffffff12 }
+    .game-choice:active { transform:scale(.985) }
+    .game-choice>span { grid-row:1/3;grid-column:1;width:40px;height:40px;display:grid;place-items:center;border:1px solid #ffffff12;border-radius:14px;background:#ffffff09;color:#e5bad0;font-size:18px }
+    .game-choice strong { color:#eae6f2;font-size:11px;font-weight:600 }
+    .game-choice small { margin-top:3px;color:#a5a1b3;font-size:9px }
+    .game-response { max-width:420px;margin:15px auto 0;padding:13px 16px;border:1px solid #e6bad01e;border-radius:16px;background:linear-gradient(145deg,#e1acc013,#ffffff06);color:#e4cedd;font-size:10px;line-height:1.9;animation:chapter-arrive .35s ease both }
+    .game-next { min-height:40px;padding:0 17px;border:1px solid #efcce11f;border-radius:14px;background:linear-gradient(145deg,#ad7897,#736990);color:white;font-size:10px;box-shadow:0 8px 22px #0003;transition:transform .2s,box-shadow .2s }
+    .game-next:hover { transform:translateY(-2px);box-shadow:0 11px 26px #0004 }
+    .game-next span { padding-inline-start:8px }
+    .game-final { max-width:430px;margin:12px auto;padding:18px;border:1px solid #eccce12b;border-radius:18px;background:linear-gradient(145deg,#49334a9c,#292a43bd);color:#f0e2ed;font-size:13px;line-height:2.1;box-shadow:0 16px 40px #0003,inset 0 1px #ffffff13;animation:card-arrive .55s cubic-bezier(.2,.8,.2,1) both }
+    .game-final span { display:block;margin-top:8px;color:#e9b5cb;font-size:11px }
+    .game-complete .game-scene-icon { color:#f0c2d8;box-shadow:0 0 40px #da9fbc35,inset 0 1px #ffffff18 }
+    .game-reset { margin-top:8px }
+    .game-controls { gap:9px;flex-wrap:wrap }
+    @keyframes halo-breathe { 0%,100% { transform:scale(1);opacity:.85 } 50% { transform:scale(1.035);opacity:1 } }
+    @media(max-width:720px) {
+      .lock-screen { min-height:100svh;padding:92px 16px 65px }
+      .lock-topline { top:22px;right:18px;left:18px }
+      .lock-private { font-size:8px }
+      .lock-brand { font-size:8px }
+      .lock-card { width:min(450px,100%);min-height:0;grid-template-columns:1fr;border-radius:28px }
+      .lock-art-panel { min-height:205px;grid-row:1;border-inline-start:0;border-bottom:1px solid #ffffff0d }
+      .lock-constellation { width:min(85%,315px) }
+      .moon-halo { width:71% }
+      .art-label { top:17px;right:19px }
+      .art-caption { bottom:12px;font-size:8px }
+      .art-caption strong { font-size:10px }
+      .lock-copy { padding:24px 23px 20px }
+      .lock-kicker { margin-bottom:11px }
+      .lock-title { font-size:clamp(29px,8vw,36px) }
+      .lock-subtitle { margin:8px 0 16px }
+      .pin-display { height:40px }
+      .keypad { max-width:290px }
+      .keypad button { height:40px }
+      .lock-signoff { margin-top:7px }
+      .lock-footnote { bottom:18px }
+      .game-scene { padding-inline:0 }
+      .game-choice { grid-template-columns:38px 1fr;padding:12px }
+      .game-choice>span { width:36px;height:36px }
+    }
+    @media(max-width:380px) {
+      .lock-screen { padding-inline:12px }
+      .lock-brand { gap:8px;font-size:7px }
+      .lock-brand-mark { width:34px;height:34px }
+      .lock-private { gap:5px;font-size:7px }
+      .lock-copy { padding-inline:17px }
+      .keypad { gap:6px }
+      .game-choice strong { font-size:10px }
+    }
+    body {
+      background:
+        radial-gradient(ellipse at 50% 0%,#17151e 0,transparent 42%),
+        radial-gradient(ellipse at 100% 100%,#10131c 0,transparent 40%),
+        #08090d;
+    }
+    .sky { opacity:.28 }
+    .lock-screen { padding:92px 18px 58px }
+    .lock-topline { top:24px;right:clamp(18px,5vw,70px);left:clamp(18px,5vw,70px) }
+    .lock-private { color:#85838c }
+    .lock-private i { background:#bc92a5;box-shadow:0 0 10px #d695b477 }
+    .lock-brand-mark { width:35px;height:35px;border-radius:12px;background:#ffffff08;border-color:#ffffff13;color:#f2d5e6 }
+    .lock-brand-mark span { color:#d998b6 }
+    .lock-card {
+      display:block;width:min(390px,100%);min-height:0;border-radius:28px;
+      background:linear-gradient(150deg,#17181de8,#101115f2);
+      border-color:#ffffff14;box-shadow:0 28px 90px #0009,inset 0 1px #ffffff0e;
+    }
+    .lock-art-panel { display:none }
+    .lock-copy { align-items:center;padding:32px clamp(22px,6vw,36px) 25px;text-align:center }
+    .lock-copy:before {
+      content:"♡";width:48px;height:48px;display:grid;place-items:center;margin-bottom:16px;
+      border:1px solid #e8c9da22;border-radius:17px;background:#e6bfd10d;
+      color:#e7b5cb;font-size:21px;box-shadow:inset 0 1px #ffffff12;
+    }
+    .lock-kicker { gap:8px;margin:0 0 8px;color:#a8a4af;font-size:10px;letter-spacing:0 }
+    .lock-kicker span { width:21px;height:21px;display:grid;place-items:center;border:1px solid #e8c9da24;border-radius:8px;color:#dfabc3;font-size:9px }
+    .lock-title { color:#f2eff5;font-size:clamp(29px,7vw,35px);letter-spacing:-.7px }
+    .lock-title span { color:#e7b5cb;text-shadow:0 0 25px #cd88ad20 }
+    .lock-subtitle { margin:5px 0 17px;color:#aaa6b1;font-size:11px }
+    .lock-separator { max-width:290px;margin-bottom:12px;color:#d99db8 }
+    .lock-separator i { background:linear-gradient(90deg,transparent,#ffffff20) }
+    .lock-separator i:last-child { background:linear-gradient(270deg,transparent,#ffffff20) }
+    .pin-label { color:#d9d5df }
+    .pin-display { max-width:280px;height:42px;margin:0 auto 12px;border-color:#ffffff13;border-radius:13px;background:#0d0e12 }
+    .pin-display i { background:#4d4b53 }
+    .pin-display i.filled { background:#e8aeca;box-shadow:0 0 0 4px #df9fbd15,0 0 14px #db9bb966 }
+    .keypad { max-width:280px;gap:7px }
+    .keypad button { height:42px;border-radius:13px;background:#202126;color:#f2eff5;border-color:#ffffff0d;box-shadow:inset 0 1px #ffffff0b }
+    .keypad button:hover { background:#2a2a31 }
+    .keypad .key-clear { color:#aaa7b1 }
+    .keypad .key-enter { background:linear-gradient(145deg,#b77e9c,#806b9a);color:white }
+    .lock-error { color:#eea8c1 }
+    .lock-signoff { color:#85818d }
+    .lock-signoff span,.lock-footnote span { color:#e2a8c0 }
+    .lock-footnote { bottom:22px;color:#77747f }
+    .sila-invitation {
+      width:min(660px,100%);display:flex;align-items:center;gap:15px;margin:30px auto 0;padding:16px;
+      border:1px solid #ffffff13;border-radius:22px;background:linear-gradient(145deg,#17181ddd,#101115e8);
+      box-shadow:0 14px 36px #0003,inset 0 1px #ffffff0a;text-align:right;
+    }
+    .sila-invitation-cat { flex:0 0 48px;width:48px;height:48px;display:grid;place-items:center;border:1px solid #e8c9da20;border-radius:16px;background:#e6bfd10d;font-size:25px }
+    .sila-invitation-copy { min-width:0;display:grid;gap:3px;flex:1 }
+    .sila-invitation-copy strong { color:#f0edf5;font-size:12px }
+    .sila-invitation-copy span,.sila-invitation-copy small { color:#a5a1ad;font-size:10px }
+    .sila-invitation-copy b { color:#e5b3ca;font-weight:600 }
+    .sila-open-button,.sila-password-row button {
+      min-height:40px;padding:0 14px;border:1px solid #ffffff16;border-radius:13px;
+      background:linear-gradient(145deg,#a87898,#766d99);color:#fff;font-size:10px;box-shadow:0 8px 20px #0003;
+      transition:transform .2s,filter .2s;
+    }
+    .sila-open-button:hover,.sila-password-row button:hover { transform:translateY(-2px);filter:brightness(1.08) }
+    .sila-open-button span { padding-inline-start:5px }
+    .sila-gate { max-width:450px;margin:24px auto 8px;padding:24px;border:1px solid #ffffff13;border-radius:22px;background:linear-gradient(145deg,#18191fdd,#111216e8);box-shadow:inset 0 1px #ffffff0a;text-align:center }
+    .sila-lock-mark { width:52px;height:52px;display:grid;place-items:center;margin:0 auto 10px;border:1px solid #e8c9da20;border-radius:18px;background:#e6bfd10d;font-size:24px }
+    .sila-gate h3,.sila-task-title { margin:0;color:#f0edf5;font-size:17px }
+    .sila-gate>p:not(.sila-error) { margin:5px 0 14px;color:#a5a1ad;font-size:10px }
+    .sila-password-row { display:flex;gap:8px }
+    .sila-password-row input { min-width:0;flex:1;padding:0 12px;border:1px solid #ffffff17;border-radius:13px;background:#0d0e12;color:#eeeaf5;font-size:12px }
+    .sila-error { min-height:18px;margin:8px 0 0;color:#eea8c1;font-size:10px }
+    .sila-mission { max-width:570px;margin:25px auto 5px }
+    .sila-cage { min-height:148px;display:grid;place-items:center;position:relative;overflow:hidden;padding:18px;border:1px solid #ffffff16;border-radius:24px;background:radial-gradient(ellipse at 50% 5%,#29202b,#14151a 72%);box-shadow:0 17px 40px #0004,inset 0 1px #ffffff0b }
+    .sila-cat { z-index:1;font-size:58px;line-height:1;filter:drop-shadow(0 8px 18px #e6aeca30);animation:float 3s ease-in-out infinite }
+    .sila-cage-bars { position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 31px,#ffffff17 32px,#ffffff17 33px,transparent 34px 49px);mask-image:linear-gradient(90deg,#000 0 40%,transparent 50% 60%,#000 70%);opacity:.65 }
+    .sila-status { position:relative;z-index:1;margin-top:8px;padding:5px 12px;border:1px solid #ffffff14;border-radius:99px;background:#0b0c10d9;color:#ddd4e2;font-size:10px }
+    .sila-cage.is-free .sila-cage-bars { opacity:0;transform:translateY(-40px);transition:opacity .7s,transform .7s }
+    .sila-cage.is-free .sila-cat { animation:sila-hop .65s ease-in-out 2 }
+    @keyframes sila-hop { 50% { transform:translateY(-18px) rotate(-7deg) } }
+    .sila-task-area,.sila-rescue { margin-top:17px;padding:20px;border:1px solid #ffffff13;border-radius:20px;background:#141519d9;text-align:center }
+    .sila-progress { display:flex;justify-content:center;gap:7px;margin-bottom:13px }
+    .sila-progress i { width:38px;height:4px;border-radius:99px;background:#ffffff1a;transition:background .3s,box-shadow .3s }
+    .sila-progress i.done { background:#dda6be;box-shadow:0 0 12px #dda6be55 }
+    .sila-task-label { margin:0 0 5px;color:#d3a8bf;font-size:9px }
+    .sila-task-copy { margin:5px auto 15px;color:#a9a5b0;font-size:10px;line-height:1.9 }
+    .sila-task-choices { display:grid;gap:9px }
+    .sila-task-choices button,.sila-star-task button { min-height:44px;padding:9px 13px;border:1px solid #ffffff15;border-radius:14px;background:linear-gradient(145deg,#ffffff0c,#ffffff05);color:#e8e4ed;font-size:11px;transition:transform .2s,border-color .2s,background .2s }
+    .sila-task-choices button:hover,.sila-star-task button:hover { transform:translateY(-2px);border-color:#e8b8d13d;background:#e7b6d012 }
+    .sila-star-task { display:flex;justify-content:center;gap:12px }
+    .sila-star-task button { width:52px;height:52px;padding:0;color:#e9bbd1;font-size:24px }
+    .sila-star-task button.collected { color:#fff1b8;background:#74633b55;box-shadow:0 0 25px #e8c98a50 }
+    .sila-task-feedback { min-height:20px;margin:9px 0 0;color:#e8bdd1;font-size:10px }
+    .sila-rescue { border-color:#e6c88a27;background:linear-gradient(145deg,#242019,#151519);animation:card-arrive .6s ease both }
+    .sila-rescue>span { font-size:42px }
+    .sila-rescue h3 { margin:6px 0;color:#f0d7e3;font-size:17px }
+    .sila-rescue p { margin:4px 0;color:#b5b0bd;font-size:10px;line-height:1.9 }
+    .sila-dock { position:fixed;z-index:30;left:18px;bottom:18px;direction:rtl }
+    .sila-dock-toggle { width:66px;height:66px;display:grid;place-items:center;position:relative;border:1px solid #ffffff1b;border-radius:23px;background:linear-gradient(145deg,#27232d,#17181e);box-shadow:0 13px 32px #0008,inset 0 1px #ffffff14;transition:transform .25s,border-color .25s }
+    .sila-dock-toggle:hover { transform:translateY(-3px) rotate(-2deg);border-color:#e8b8d144 }
+    .sila-dock-cat { font-size:30px;filter:drop-shadow(0 4px 9px #e6aeca33) }
+    .sila-dock-label { position:absolute;bottom:-8px;right:-5px;padding:2px 7px;border:1px solid #ffffff1b;border-radius:99px;background:#222128;color:#e8d9e3;font-size:8px }
+    .sila-dock-lock { position:absolute;top:-5px;left:-5px;font-size:13px }
+    .sila-bubble { max-width:210px;position:absolute;left:0;bottom:76px;margin:0;padding:9px 12px;border:1px solid #ffffff15;border-radius:14px 14px 4px 14px;background:#18191fee;color:#dfdbe5;font-size:9px;line-height:1.7;box-shadow:0 9px 24px #0005;animation:card-arrive .35s ease both }
+    .sila-chat-panel { width:min(330px,calc(100vw - 28px));height:min(430px,calc(100dvh - 125px));min-height:300px;display:flex;flex-direction:column;position:absolute;left:0;bottom:79px;overflow:hidden;border-radius:22px;background:linear-gradient(145deg,#1d1b23f5,#111216fa);border-color:#ffffff19;box-shadow:0 22px 65px #0009 }
+    .sila-chat-header { display:flex;align-items:center;gap:10px;padding:13px 14px;border-bottom:1px solid #ffffff10 }
+    .sila-chat-header>span { width:35px;height:35px;display:grid;place-items:center;border:1px solid #ffffff12;border-radius:12px;background:#ffffff08;font-size:18px }
+    .sila-chat-header div { display:grid;gap:1px;flex:1 }
+    .sila-chat-header strong { color:#f0edf5;font-size:11px }
+    .sila-chat-header small { color:#a5a1ad;font-size:9px }
+    .sila-chat-header>button { width:28px;height:28px;border:1px solid #ffffff12;border-radius:9px;background:#ffffff08;color:#ccc6d2;font-size:17px }
+    .sila-chat-log { display:flex;flex:1;flex-direction:column;gap:8px;overflow-y:auto;padding:12px }
+    .sila-chat-message { max-width:88%;padding:8px 10px;border:1px solid #ffffff0d;border-radius:13px;background:#ffffff08;color:#ddd8e2;font-size:10px;line-height:1.8;overflow-wrap:anywhere }
+    .sila-chat-message.user { align-self:flex-start;border-color:#dfa9c21c;background:#dfa9c210;color:#f0dce6 }
+    .sila-chat-quick { display:flex;flex-wrap:wrap;gap:5px;padding:0 10px 8px }
+    .sila-chat-quick button { padding:6px 8px;border:1px solid #ffffff12;border-radius:99px;background:#ffffff08;color:#c9c4cf;font-size:8px }
+    .sila-chat-form { display:flex;gap:7px;padding:9px 10px;border-top:1px solid #ffffff10 }
+    .sila-chat-form input { min-width:0;flex:1;padding:8px 10px;border:1px solid #ffffff12;border-radius:12px;background:#0d0e12;color:#eeeaf5;font-size:10px }
+    .sila-chat-form button { width:35px;border:0;border-radius:12px;background:#986f8d;color:white;font-size:17px }
+    .sila-chat-mission { padding:0 10px 10px;border:0;background:transparent;color:#d8a9c1;font-size:9px;text-align:center }
+    .sila-chat-mission:disabled { display:none }
+    @media(max-width:600px) {
+      .sila-invitation { display:grid;grid-template-columns:48px 1fr;gap:10px;padding:13px }
+      .sila-invitation-copy strong { font-size:11px }
+      .sila-open-button { grid-column:1/-1;width:100% }
+      .sila-dock { left:12px;bottom:12px }
+      .sila-dock-toggle { width:58px;height:58px;border-radius:20px }
+      .sila-chat-panel { bottom:70px }
+      .sila-bubble { bottom:68px }
+      .sila-password-row { flex-direction:column }
+      .sila-password-row input { min-height:42px }
+      .sila-gate { padding:19px 15px }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      *,*:before,*:after { scroll-behavior:auto !important;animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important }
+    }
+    :root { --ink:#ff5b5b;--muted:#e34b4b;--violet:#ff3b3b;--pink:#ff4d4d;--stroke:#a32222 }
+    body { color:#ff5b5b;background:radial-gradient(ellipse at 50% 0,#260707 0,transparent 42%),#050505 }
+    .blur-orb { background:#b00000 }
+    .orb-left,.orb-right { background:#b00000 }
+    .star { background:#ff6b6b;box-shadow:0 0 12px 3px #ff333355 }
+    .glass,.lock-card,.choice-card,.game-invitation,.chapter-card,.dear-note,.game-shell,.messages-gate,.sila-gate,.sila-task-area,.sila-rescue,.sila-cage,.sila-chat-panel,.music-player,.days-pill,.message-item,.game-stat,.game-tile,.memory-photo,.photo-viewer,.toast {
+      background:#0b0b0b !important;border-color:#651616 !important;box-shadow:0 16px 42px #0009,inset 0 1px #ffffff08 !important
+    }
+    .lock-art-panel { background:radial-gradient(ellipse at center,#240909,#080808 75%) }
+    .lock-art-panel:before,.moon-halo,.choice-orbit,.game-invitation-icon,.sila-invitation-cat,.sila-lock-mark { border-color:#882222;background-color:#140909 }
+    .wordmark-icon,.keypad .key-enter,.game-open-button,.send-button,.messages-password-form button,.sila-open-button,.sila-password-row button,.game-next,.sila-chat-form button {
+      color:#ff7373 !important;background:#220909 !important;border-color:#a52a2a !important
+    }
+    .music-next { color:#ff7373 !important;background:#160707 !important;border-color:#852020 !important }
+    button,input,textarea,select { color:#ff6868 !important;background-color:#090909 !important;border-color:#852020 !important }
+    button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible { outline-color:#ff4545 !important }
+    h1,h2,h3,p,label,span,strong,small,a,button,input,textarea,select,footer,
+    .lock-title,.home-title,.chapter-title,.choice-prompt,.message-item p,.sila-status {
+      color:#ff6262 !important
+    }
+    input::placeholder,textarea::placeholder { color:#b64a4a !important }
+    .lock-error,.sila-error,.messages-gate-error { color:#ff8a8a !important }
+    .logout-button { min-height:34px;padding:0 11px;border:1px solid #852020;border-radius:11px;background:#100707;color:#ff6262;font-size:9px }
+    .topbar { gap:10px }
+    @media(max-width:600px) {
+      .days-pill { gap:5px;padding:6px 8px }
+      .days-pill small { display:none }
+      .logout-button { padding:0 8px }
+    }
+    .sila-svg-sprite { position:absolute;width:0;height:0;overflow:hidden }
+    .sila-home-mascot {
+      width:min(440px,100%);min-height:145px;display:flex;align-items:center;justify-content:center;gap:10px;
+      margin:18px auto 22px;padding:4px;border:0;border-radius:26px;background:transparent !important;text-align:right;
+      cursor:pointer;transition:transform .25s ease;
+    }
+    .sila-home-mascot { border-color:transparent !important;box-shadow:none !important }
+    .sila-home-mascot:hover { transform:translateY(-2px) }
+    .sila-mascot-art { width:152px;height:128px;flex:none;overflow:visible;filter:drop-shadow(0 13px 15px #8f7bc044) }
+    .sila-home-mascot.is-active .sila-mascot-art { animation:sila-float 5s ease-in-out infinite }
+    .sila-home-mascot.is-active .sila-mascot-head { transform-box:view-box;transform-origin:120px 91px;animation:sila-look 7s ease-in-out infinite }
+    .sila-home-mascot.is-active .sila-mascot-eye { transform-box:fill-box;transform-origin:center;animation:sila-blink 6.4s ease-in-out infinite }
+    .sila-mascot-wave-arm { transform-box:view-box;transform-origin:170px 123px }
+    .sila-home-mascot.is-welcoming .sila-mascot-wave-arm { animation:sila-wave 1.25s ease-in-out 2 }
+    .sila-home-mascot.is-welcoming .sila-mascot-head { animation:sila-greet .8s ease-in-out 2 }
+    .sila-welcome-bubble {
+      max-width:245px;min-height:74px;display:flex;align-items:center;position:relative;padding:14px 16px;
+      border:1px solid #b9b1d748;border-radius:20px;background:linear-gradient(145deg,#272333ed,#15131df5);
+      box-shadow:0 14px 36px #0007,0 0 30px #9a8bca16,inset 0 1px #ffffff12;
+      color:#eeeaf8;font-size:12px;line-height:1.9;opacity:0;transform:translateX(10px) scale(.97);
+      transition:opacity .35s ease,transform .35s ease;
+    }
+    .sila-welcome-bubble:after { content:"";position:absolute;right:-7px;top:50%;width:12px;height:12px;border-top:1px solid #b9b1d748;border-right:1px solid #b9b1d748;background:#201c2b;transform:translateY(-50%) rotate(45deg) }
+    .is-welcoming .sila-welcome-bubble { opacity:1;transform:translateX(0) scale(1) }
+    .sila-welcome-text { color:#eeeaf8 !important }
+    .sila-dock { z-index:40 }
+    .sila-dock-toggle { width:70px;height:70px;border-color:#aaa0c252 !important;background:radial-gradient(circle at 35% 20%,#413752,#17131f 72%) !important;box-shadow:0 15px 34px #0008,0 0 28px #a294cf1c,inset 0 1px #ffffff20 !important }
+    .sila-dock-toggle:hover { border-color:#d5cdecaa }
+    .sila-dock-art { width:58px;height:58px;filter:drop-shadow(0 5px 8px #b7a9df44) }
+    .sila-dock-label { right:-7px;background:#1a1722;border-color:#a99fc04a;color:#e6e1f1 !important }
+    .sila-bubble { border-color:#afa5cb55;background:linear-gradient(145deg,#292433f5,#17141df5);color:#e8e3f2 !important;box-shadow:0 10px 28px #0008,0 0 25px #a294cf14 }
+    .sila-chat-panel {
+      border:1px solid #aaa0c25e !important;border-radius:24px;
+      background:linear-gradient(145deg,rgba(37,32,49,.97),rgba(14,13,19,.98)) !important;
+      box-shadow:0 24px 70px #000b,0 0 38px #9888cf20,inset 0 1px #ffffff14 !important;
+      backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);
+    }
+    .sila-chat-header { min-height:62px;border-bottom-color:#b9afd71e }
+    .sila-chat-avatar { width:39px;height:39px;display:grid;place-items:center;overflow:hidden;border:1px solid #bdb1df46;border-radius:14px;background:radial-gradient(circle at 40% 25%,#54496b,#272130);box-shadow:0 5px 16px #0005 }
+    .sila-chat-avatar svg { width:42px;height:38px;filter:drop-shadow(0 2px 6px #bba8e855) }
+    .sila-chat-header strong { color:#f2effa !important;font-size:12px }
+    .sila-chat-header small { color:#c0b9d0 !important }
+    .sila-chat-header>button { border-color:#c5bbdf26;background:#ffffff09;color:#e8e2f2 !important }
+    .sila-chat-log { gap:10px;padding:14px 12px;scrollbar-color:#655879 transparent;scrollbar-width:thin }
+    .sila-chat-message { max-width:88%;padding:9px 12px;border:1px solid #b9afd71c;border-radius:16px 16px 16px 5px;background:linear-gradient(145deg,#302a3b,#211d29);color:#eeeaf6 !important;font-size:11px;line-height:1.85 }
+    .sila-chat-message.user { align-self:flex-start;border-color:#9c8ac83d;border-radius:16px 16px 5px 16px;background:linear-gradient(145deg,#49405d,#312b40);color:#f4f0ff !important }
+    .sila-chat-message.error { border-color:#ff626244;background:#2a171b;color:#ffb0b0 !important }
+    .sila-chat-quick { gap:6px;padding:0 11px 9px }
+    .sila-chat-quick button { border-color:#b9afd72a !important;background:#ffffff08 !important;color:#d9d2e8 !important;transition:background .2s,border-color .2s }
+    .sila-chat-quick button:hover:not(:disabled) { border-color:#b5a5dd76;background:#a294cf20 }
+    .sila-chat-form { align-items:center;border-top-color:#b9afd71e;padding:10px }
+    .sila-chat-form input { min-height:40px;padding:9px 12px;border-color:#b9afd72e !important;border-radius:14px;background:#100e16 !important;color:#f0ebf8 !important;font-size:11px }
+    .sila-chat-form input::placeholder { color:#aba2bd !important }
+    .sila-chat-form button,.sila-chat-attach { width:39px;height:39px;flex:none;display:grid;place-items:center;border:1px solid #b6a8d83d !important;border-radius:13px;background:linear-gradient(145deg,#544765,#342b42) !important;color:#f0eafa !important;font-size:17px;box-shadow:0 6px 16px #0005;transition:transform .2s,filter .2s }
+    .sila-chat-form button:hover:not(:disabled),.sila-chat-attach:hover { transform:translateY(-2px);filter:brightness(1.18) }
+    .sila-chat-form button:disabled,.sila-chat-quick button:disabled { opacity:.55;cursor:wait }
+    .sila-chat-attachment { margin:0 10px 8px;padding:6px 10px;border:1px solid #b6a8d833;border-radius:11px;background:#302a3c;color:#e3ddf0 !important;font-size:9px }
+    .sila-chat-attachment button { float:left;border:0 !important;background:transparent !important;color:#e8a4a4 !important }
+    .sila-typing { display:flex;align-items:center;gap:4px;min-width:49px;min-height:27px }
+    .sila-typing i { width:5px;height:5px;border-radius:50%;background:#c9bee5;animation:sila-dot 1.15s ease-in-out infinite }
+    .sila-typing i:nth-child(2) { animation-delay:.16s }.sila-typing i:nth-child(3) { animation-delay:.32s }
+    .photo-viewer-ask-sila { min-height:36px;display:block;margin:10px auto 0;padding:0 14px;border:1px solid #b6a8d844 !important;border-radius:12px;background:#282231 !important;color:#e4ddf0 !important;font-size:10px }
+    @keyframes sila-float { 0%,100% { transform:translateY(0) } 50% { transform:translateY(-5px) } }
+    @keyframes sila-wave { 0%,100% { transform:rotate(0) } 22%,58% { transform:rotate(-25deg) } 40%,76% { transform:rotate(13deg) } }
+    @keyframes sila-greet { 0%,100% { transform:rotate(0) } 45% { transform:rotate(-5deg) } 75% { transform:rotate(3deg) } }
+    @keyframes sila-look { 0%,100% { transform:rotate(0) } 42% { transform:rotate(1.5deg) } 58% { transform:rotate(-1deg) } }
+    @keyframes sila-blink { 0%,45%,49%,100% { transform:scaleY(1) } 47% { transform:scaleY(.08) } }
+    @keyframes sila-dot { 0%,60%,100% { transform:translateY(0);opacity:.45 } 30% { transform:translateY(-4px);opacity:1 } }
+    @media(max-width:600px) {
+      .sila-home-mascot { gap:2px;min-height:120px;margin:12px auto 17px }
+      .sila-mascot-art { width:122px;height:110px }
+      .sila-welcome-bubble { max-width:210px;padding:11px 12px;font-size:10px }
+      .sila-chat-panel { width:min(360px,calc(100vw - 20px));height:min(500px,calc(100dvh - 100px));left:-2px;bottom:70px }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      .sila-mascot-art,.sila-mascot-head,.sila-mascot-eye,.is-welcoming .sila-mascot-wave-arm,.is-welcoming .sila-mascot-head,.sila-typing i { animation:none !important }
+    }
+  </style>
+</head>
+<body>
+  <div class="sky" aria-hidden="true"><div class="blur-orb orb-left"></div><div class="blur-orb orb-right"></div><i class="star star-a"></i><i class="star star-b"></i><i class="star star-c"></i></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <svg class="sila-svg-sprite" aria-hidden="true" focusable="false">
+    <symbol id="sila-mascot-symbol" viewBox="0 0 240 200">
+      <defs>
+        <radialGradient id="sila-fur" cx="38%" cy="24%" r="80%"><stop stop-color="#b9b4ca"/><stop offset=".48" stop-color="#777187"/><stop offset="1" stop-color="#342b48"/></radialGradient>
+        <linearGradient id="sila-belly" x1="75" y1="110" x2="165" y2="184"><stop stop-color="#c9c4d5"/><stop offset="1" stop-color="#827b96"/></linearGradient>
+        <linearGradient id="sila-ear" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#db9fc3"/><stop offset="1" stop-color="#8f6c9e"/></linearGradient>
+        <linearGradient id="sila-silver" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f6f2ff"/><stop offset="1" stop-color="#aba3bd"/></linearGradient>
+        <radialGradient id="sila-eye" cx="35%" cy="28%"><stop stop-color="#d9c6f4"/><stop offset=".42" stop-color="#8875b5"/><stop offset="1" stop-color="#30263e"/></radialGradient>
+        <filter id="sila-shadow" x="-35%" y="-35%" width="170%" height="180%"><feGaussianBlur stdDeviation="3"/></filter>
+      </defs>
+      <ellipse cx="119" cy="184" rx="67" ry="9" fill="#06050a" opacity=".45" filter="url(#sila-shadow)"/>
+      <path d="M72 127c-27 4-36 25-25 37 8 9 23 3 33-10" fill="none" stroke="#685d7b" stroke-width="12" stroke-linecap="round"/>
+      <path d="M75 125c-22 8-24 23-15 28 7 4 14-2 20-9" fill="none" stroke="#a49bb5" stroke-width="4" stroke-linecap="round"/>
+      <path d="M76 119c-13 13-16 35-6 53 9 16 28 19 50 19s42-4 51-20c10-18 6-40-7-53Z" fill="url(#sila-fur)" stroke="#d4cede" stroke-opacity=".38" stroke-width="2"/>
+      <path d="M91 139c-2 17 10 29 29 29s31-12 29-29c-11-8-47-8-58 0Z" fill="url(#sila-belly)" opacity=".86"/>
+      <path d="M81 160c4 11 13 14 21 13m37 0c8 1 17-3 21-14" fill="none" stroke="#e5e0ed" stroke-opacity=".74" stroke-width="3" stroke-linecap="round"/>
+      <g class="sila-mascot-wave-arm">
+        <path d="M159 124c10-5 17-15 19-28l4-17c2-8-3-13-9-11-5 2-6 7-8 12l-5 17-12 13Z" fill="url(#sila-fur)" stroke="#d4cede" stroke-opacity=".45" stroke-width="2"/>
+        <path d="M169 91c-5-4-4-12 1-16 2-2 5-2 7 0l2 3c2-4 8-4 10 0 3-4 9-2 9 3 4-2 8 2 7 6l-4 12c-2 7-10 11-18 8-8-3-13-8-14-16Z" fill="url(#sila-silver)" stroke="#f0ebf7" stroke-width="1.5"/>
+        <path d="m179 95 1 5m9-7 0 6m9-4-1 5" stroke="#82798f" stroke-width="2" stroke-linecap="round"/>
+      </g>
+      <g class="sila-mascot-head">
+        <path d="M63 75 54 34c-2-9 7-14 14-8l29 23c15-5 31-5 46 0l29-23c7-6 16-1 14 8l-9 41c10 12 15 25 14 40-2 33-29 54-71 54S48 148 47 115c-1-15 5-29 16-40Z" fill="url(#sila-fur)" stroke="#ddd8e9" stroke-opacity=".67" stroke-width="2.5"/>
+        <path d="m66 39 22 17-17 14Z" fill="url(#sila-ear)"/><path d="m174 39-22 17 17 14Z" fill="url(#sila-ear)"/>
+        <path d="M73 105c2-17 13-24 25-20 8 3 10 15 7 25-3 11-12 16-21 12-8-3-12-9-11-17Zm61 5c-3-10-1-22 7-25 12-4 23 3 25 20 1 8-3 14-11 17-9 4-18-1-21-12Z" fill="#f3eff8" opacity=".95"/>
+        <g class="sila-mascot-eye"><ellipse cx="91" cy="104" rx="8" ry="10" fill="url(#sila-eye)"/><ellipse cx="149" cy="104" rx="8" ry="10" fill="url(#sila-eye)"/><ellipse cx="93" cy="103" rx="3.6" ry="6" fill="#171421"/><ellipse cx="151" cy="103" rx="3.6" ry="6" fill="#171421"/><circle cx="94" cy="100" r="2" fill="#fff"/><circle cx="152" cy="100" r="2" fill="#fff"/></g>
+        <path d="M108 127c4-5 20-5 24 0l-12 10Z" fill="url(#sila-ear)"/><path d="M120 137c-2 7-7 9-12 8m12-8c2 7 7 9 12 8" fill="none" stroke="#4c405b" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="m77 121-27-5m28 12-26 4m109-11 27-5m-28 12 26 4" fill="none" stroke="#ded9e8" stroke-opacity=".88" stroke-width="2" stroke-linecap="round"/>
+        <path d="M87 84c4-4 9-5 14-3m38 0c5-2 10-1 14 3" fill="none" stroke="#554a68" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M87 129c5 4 11 4 16 1m34 0c5 3 11 3 16-1" fill="none" stroke="#da9ebc" stroke-opacity=".7" stroke-width="5" stroke-linecap="round"/>
+        <path d="M120 157v7" stroke="#d8cee8" stroke-width="2"/><path d="M113 159q7 8 14 0" fill="none" stroke="#e7d8f6" stroke-width="2"/>
+      </g>
+      <path d="M91 170c14 8 43 8 58 0" fill="none" stroke="url(#sila-silver)" stroke-width="3"/>
+      <circle cx="120" cy="174" r="5" fill="#d9c4f1" stroke="#fff" stroke-opacity=".8"/>
+    </symbol>
+  </svg>
+
+  <main id="lock-screen" class="lock-screen">
+    <header class="lock-topline">
+      <a class="lock-brand" href="#" aria-label="ملك وأحمد">
+        <span class="lock-brand-mark">M<span>×</span>A</span>
+        <span>OUR LITTLE UNIVERSE<small>MADE FOR MALAK</small></span>
+      </a>
+      <span class="lock-private"><i></i> مساحة خاصة</span>
+    </header>
+    <section class="lock-card glass" aria-label="شاشة دخول خاصة">
+      <div class="lock-copy">
+        <p class="lock-kicker"><span>♥</span> مساحة ملك وأحمد</p>
+        <h1 class="lock-title">أهلاً يا <span>ملك</span></h1>
+        <p class="lock-subtitle">مكان صغير لينا… ادخلي عشان تلاقي حكايتك.</p>
+        <div class="lock-separator"><i></i><span>♥</span><i></i></div>
+        <p class="pin-label">كلمة السر بتاعتنا</p>
+        <div class="pin-display" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <form id="login-form" novalidate>
+          <input id="entry-code" class="pin-input" type="password" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="أدخلي كلمة المرور المكونة من أربعة أرقام">
+          <div class="keypad" aria-label="لوحة الأرقام">
+            <button type="button" data-digit="1">1</button><button type="button" data-digit="2">2</button><button type="button" data-digit="3">3</button>
+            <button type="button" data-digit="4">4</button><button type="button" data-digit="5">5</button><button type="button" data-digit="6">6</button>
+            <button type="button" data-digit="7">7</button><button type="button" data-digit="8">8</button><button type="button" data-digit="9">9</button>
+            <button type="button" class="key-clear" data-action="clear">مسح</button><button type="button" data-digit="0">0</button><button type="submit" class="key-enter" aria-label="دخول">↵</button>
+          </div>
+          <p id="lock-error" class="lock-error" aria-live="polite"></p>
+        </form>
+        <p class="lock-signoff">هستناكي جوّه <span>♡</span></p>
+      </div>
+      <div class="lock-art-panel">
+        <span class="art-label">YOU + ME, ALWAYS</span>
+        <div class="lock-constellation" aria-hidden="true">
+          <i class="constellation-star star-one">✦</i>
+          <i class="constellation-star star-two">✧</i>
+          <i class="constellation-star star-three">·</i>
+          <i class="constellation-star star-four">·</i>
+          <div class="moon-halo">
+            <svg class="couple-illustration" viewBox="0 0 260 260" fill="none">
+              <circle cx="130" cy="130" r="91" stroke="url(#ring)" stroke-width="1"/>
+              <circle cx="130" cy="130" r="76" stroke="#F0C3D844" stroke-width="1"/>
+              <path d="M148 64a72 72 0 1 0 48 118 68 68 0 0 1-48-118Z" fill="url(#crescent)"/>
+              <path d="M131 128c0-16 25-16 25 0 0 12-25 27-25 27s-25-15-25-27c0-16 25-16 25 0Z" fill="#F4C7DC" fill-opacity=".94"/>
+              <path d="m79 173 5 12 12 5-12 5-5 12-5-12-12-5 12-5 5-12Z" fill="#F5DDEA" fill-opacity=".9"/>
+              <circle cx="187" cy="83" r="3" fill="#F5DDEA"/>
+              <circle cx="72" cy="97" r="2" fill="#B7C7F0"/>
+              <circle cx="183" cy="194" r="2" fill="#B7C7F0"/>
+              <defs>
+                <linearGradient id="ring" x1="36" y1="48" x2="217" y2="224" gradientUnits="userSpaceOnUse"><stop stop-color="#F4D6E7" stop-opacity=".8"/><stop offset="1" stop-color="#9DB4EF" stop-opacity=".25"/></linearGradient>
+                <linearGradient id="crescent" x1="71" y1="63" x2="199" y2="205" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF1FA"/><stop offset=".52" stop-color="#E8BBD9"/><stop offset="1" stop-color="#A7B9E9"/></linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <div class="art-caption"><span>من يوم 30 · 05 · 2026</span><strong>وكل يوم معاكي… حكاية</strong></div>
+      </div>
+    </section>
+    <p class="lock-footnote">قلبك له مكانه هنا <span>♥</span></p>
+  </main>
+
+  <div id="app-shell" class="app-shell hidden">
+    <header class="topbar">
+      <a class="wordmark" href="#" id="home-link">
+        <span class="wordmark-icon">♥</span>
+        <span class="wordmark-copy">حكاية ملك وأحمد<small>JUST BETWEEN US</small></span>
+      </a>
+      <div class="days-pill" aria-live="polite"><span class="days-spark">✦</span><strong id="days-count">175</strong><small>يوم من يوم ما عرفنا بعض</small></div>
+      <button id="logout-button" class="logout-button" type="button">خروج ↩</button>
+    </header>
+    <div id="music-player" class="music-player glass">
+      <button id="music-toggle" class="music-toggle" type="button" aria-label="تشغيل الموسيقى" aria-pressed="false"><span aria-hidden="true">♫</span></button>
+      <div class="music-copy">
+        <strong id="music-track-title">موسيقى حكايتنا · المقطع الأول</strong>
+        <span id="audio-status" role="status" aria-live="polite">هتبدأ أول ما تدخلي يا ملك ♥</span>
+      </div>
+      <button id="music-next" class="music-next" type="button" aria-label="تشغيل المقطع الصوتي التالي" title="المقطع التالي">»</button>
+      <audio id="memory-audio" preload="auto" autoplay muted loop>
+        <source src="WhatsApp%20Audio%202026-11-21%20at%2011.22.44%20PM.mpeg" type="audio/mpeg">
+        المتصفح لا يدعم تشغيل الصوت.
+      </audio>
+    </div>
+
+    <main id="home-view" class="home-wrap">
+      <p class="welcome-greeting"><i></i> مساحة صغيرة ليكي <i></i></p>
+      <h2 class="home-title">أهلاً يا <span>ملك</span> ♥</h2>
+      <p class="home-subtitle">كل كارت مخبّي حكاية من قلبي… اختاري نبدأ بأنهي واحدة.</p>
+      <button id="sila-home-mascot" class="sila-home-mascot" type="button" aria-label="افتحي دردشة سيلا">
+        <svg class="sila-mascot-art" viewBox="0 0 240 200" aria-hidden="true">
+          <defs>
+            <radialGradient id="sila-home-fur" cx="38%" cy="24%" r="80%"><stop stop-color="#b9b4ca"/><stop offset=".48" stop-color="#777187"/><stop offset="1" stop-color="#342b48"/></radialGradient>
+            <linearGradient id="sila-home-belly" x1="75" y1="110" x2="165" y2="184"><stop stop-color="#c9c4d5"/><stop offset="1" stop-color="#827b96"/></linearGradient>
+            <linearGradient id="sila-home-ear" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#db9fc3"/><stop offset="1" stop-color="#8f6c9e"/></linearGradient>
+            <linearGradient id="sila-home-silver" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f6f2ff"/><stop offset="1" stop-color="#aba3bd"/></linearGradient>
+            <radialGradient id="sila-home-eye" cx="35%" cy="28%"><stop stop-color="#d9c6f4"/><stop offset=".42" stop-color="#8875b5"/><stop offset="1" stop-color="#30263e"/></radialGradient>
+            <filter id="sila-home-shadow" x="-35%" y="-35%" width="170%" height="180%"><feGaussianBlur stdDeviation="3"/></filter>
+          </defs>
+          <ellipse cx="119" cy="184" rx="67" ry="9" fill="#06050a" opacity=".45" filter="url(#sila-home-shadow)"/>
+          <path d="M72 127c-27 4-36 25-25 37 8 9 23 3 33-10" fill="none" stroke="#685d7b" stroke-width="12" stroke-linecap="round"/>
+          <path d="M75 125c-22 8-24 23-15 28 7 4 14-2 20-9" fill="none" stroke="#a49bb5" stroke-width="4" stroke-linecap="round"/>
+          <path d="M76 119c-13 13-16 35-6 53 9 16 28 19 50 19s42-4 51-20c10-18 6-40-7-53Z" fill="url(#sila-home-fur)" stroke="#d4cede" stroke-opacity=".38" stroke-width="2"/>
+          <path d="M91 139c-2 17 10 29 29 29s31-12 29-29c-11-8-47-8-58 0Z" fill="url(#sila-home-belly)" opacity=".86"/>
+          <path d="M81 160c4 11 13 14 21 13m37 0c8 1 17-3 21-14" fill="none" stroke="#e5e0ed" stroke-opacity=".74" stroke-width="3" stroke-linecap="round"/>
+          <g class="sila-mascot-wave-arm">
+            <path d="M159 124c10-5 17-15 19-28l4-17c2-8-3-13-9-11-5 2-6 7-8 12l-5 17-12 13Z" fill="url(#sila-home-fur)" stroke="#d4cede" stroke-opacity=".45" stroke-width="2"/>
+            <path d="M169 91c-5-4-4-12 1-16 2-2 5-2 7 0l2 3c2-4 8-4 10 0 3-4 9-2 9 3 4-2 8 2 7 6l-4 12c-2 7-10 11-18 8-8-3-13-8-14-16Z" fill="url(#sila-home-silver)" stroke="#f0ebf7" stroke-width="1.5"/>
+            <path d="m179 95 1 5m9-7 0 6m9-4-1 5" stroke="#82798f" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <g class="sila-mascot-head">
+            <path d="M63 75 54 34c-2-9 7-14 14-8l29 23c15-5 31-5 46 0l29-23c7-6 16-1 14 8l-9 41c10 12 15 25 14 40-2 33-29 54-71 54S48 148 47 115c-1-15 5-29 16-40Z" fill="url(#sila-home-fur)" stroke="#ddd8e9" stroke-opacity=".67" stroke-width="2.5"/>
+            <path d="m66 39 22 17-17 14Z" fill="url(#sila-home-ear)"/><path d="m174 39-22 17 17 14Z" fill="url(#sila-home-ear)"/>
+            <path d="M73 105c2-17 13-24 25-20 8 3 10 15 7 25-3 11-12 16-21 12-8-3-12-9-11-17Zm61 5c-3-10-1-22 7-25 12-4 23 3 25 20 1 8-3 14-11 17-9 4-18-1-21-12Z" fill="#f3eff8" opacity=".95"/>
+            <g class="sila-mascot-eye"><ellipse cx="91" cy="104" rx="8" ry="10" fill="url(#sila-home-eye)"/><ellipse cx="149" cy="104" rx="8" ry="10" fill="url(#sila-home-eye)"/><ellipse cx="93" cy="103" rx="3.6" ry="6" fill="#171421"/><ellipse cx="151" cy="103" rx="3.6" ry="6" fill="#171421"/><circle cx="94" cy="100" r="2" fill="#fff"/><circle cx="152" cy="100" r="2" fill="#fff"/></g>
+            <path d="M108 127c4-5 20-5 24 0l-12 10Z" fill="url(#sila-home-ear)"/><path d="M120 137c-2 7-7 9-12 8m12-8c2 7 7 9 12 8" fill="none" stroke="#4c405b" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="m77 121-27-5m28 12-26 4m109-11 27-5m-28 12 26 4" fill="none" stroke="#ded9e8" stroke-opacity=".88" stroke-width="2" stroke-linecap="round"/>
+            <path d="M87 84c4-4 9-5 14-3m38 0c5-2 10-1 14 3" fill="none" stroke="#554a68" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M87 129c5 4 11 4 16 1m34 0c5 3 11 3 16-1" fill="none" stroke="#da9ebc" stroke-opacity=".7" stroke-width="5" stroke-linecap="round"/>
+          </g>
+          <path d="M91 170c14 8 43 8 58 0" fill="none" stroke="url(#sila-home-silver)" stroke-width="3"/>
+          <circle cx="120" cy="174" r="5" fill="#d9c4f1" stroke="#fff" stroke-opacity=".8"/>
+        </svg>
+        <span id="sila-welcome-bubble" class="sila-welcome-bubble"><span id="sila-welcome-text" class="sila-welcome-text" aria-live="polite"></span></span>
+      </button>
+      <span class="memory-count">A FEW LITTLE SURPRISES</span>
+      <section class="choice-grid" aria-label="اختاري كارت">
+        <button class="choice-card" data-chapter="for-you" aria-label="افتحي كارت مفاجأة">
+          <span class="choice-orbit" aria-hidden="true">✉</span><p class="choice-prompt">اختاري حاجة</p><span class="choice-hint">افتحي الكارت</span>
+        </button>
+        <button class="choice-card" data-chapter="messages" aria-label="افتحي كارت مفاجأة">
+          <span class="choice-orbit" aria-hidden="true">♡</span><p class="choice-prompt">اختاري حاجة</p><span class="choice-hint">افتحي الكارت</span>
+        </button>
+        <button class="choice-card" data-chapter="sorry" aria-label="افتحي كارت مفاجأة">
+          <span class="choice-orbit" aria-hidden="true">✧</span><p class="choice-prompt">اختاري حاجة</p><span class="choice-hint">افتحي الكارت</span>
+        </button>
+      </section>
+      <p class="home-caption">متعرفيش هتلاقي إيه <span>·</span> بس كله معمول بحب</p>
+      <section class="game-invitation" aria-label="لعبة رومانسية خاصة">
+        <div class="game-invitation-icon" aria-hidden="true">♡</div>
+        <div class="game-invitation-copy">
+          <strong>استراحة صغيرة للّعب</strong>
+          <span>لمّي كل قلب مع شبيهه في لعبتنا الهادية.</span>
+        </div>
+        <button class="game-open-button" type="button" data-chapter="heart-game">لعبة مخصوص ليكي</button>
+      </section>
+      <section class="sila-invitation" aria-label="مهمة تحرير سيلا">
+        <div class="sila-invitation-cat" aria-hidden="true">🐱</div>
+        <div class="sila-invitation-copy">
+          <strong>حرري الرفيقة بتاعتك يا لوكه</strong>
+          <span>سيلا مستنياكي… وعندها شوية مهمات صغيرة.</span>
+          <small>كلمة الدخول: <b>سيلا</b></small>
+        </div>
+        <button class="sila-open-button" type="button" data-chapter="sila">روحي لسيلا <span>←</span></button>
+      </section>
+    </main>
+
+    <section id="chapter-for-you" class="chapter">
+      <button class="chapter-back" data-back>← رجوع للكروت</button>
+      <article class="chapter-card glass">
+        <p class="chapter-kicker"><span></span> A LITTLE NOTE FOR YOU</p>
+        <h2 class="chapter-title">رسالة ليكي</h2>
+        <p class="chapter-intro">يمكن مش بقولها كل يوم… بس إنتِ غالية عندي أوي.</p>
+        <div class="dear-note">
+          <p>يا ملك، وجودك في حياتي مش حاجة عادية… إنتِ بتخلّي أبسط الحاجات أحلى، ووجودك لوحده بيطمن قلبي. بحب ضحكتك، وطريقتك، وكل تفصيلة صغيرة بتخصك.</p>
+          <p>نفسي أفضل حد ترتاحي معاه، يسمعك بجد، ويطمن قلبك. إنتِ تستاهلي حب واهتمام وأمان، وأنا كل يوم بختارك من قلبي.</p>
+          <p class="note-signature">من أحمد، ليكي إنتِ ♥</p>
+        </div>
+        <div class="chapter-bottom"><span>30 / 05 / 2026</span><span>♥</span></div>
+      </article>
+    </section>
+
+    <section id="chapter-messages" class="chapter">
+      <button class="chapter-back" data-back>← رجوع للكروت</button>
+      <article class="chapter-card glass">
+        <p class="chapter-kicker"><span></span> OUR MESSAGES</p>
+        <h2 class="chapter-title">أحلى مسدجات بينا</h2>
+        <p class="chapter-intro">هنا بنحوش الكلام اللي بيخلّي قلبنا يبتسم كل ما نرجعله.</p>
+        <form id="messages-password-form" class="messages-gate" novalidate>
+          <div class="messages-gate-mark" aria-hidden="true">♡</div>
+          <h3>ركننا الخاص</h3>
+          <p>اكتبي كلمة السر عشان تفتحي الذكريات دي.</p>
+          <div class="messages-password-form">
+            <input id="messages-password" type="password" autocomplete="off" placeholder="كلمة السر" aria-label="كلمة سر المسدجات" required>
+            <button type="submit">افتحي الرسائل</button>
+          </div>
+          <p id="messages-password-error" class="messages-gate-error" aria-live="polite"></p>
+        </form>
+        <div id="messages-content" class="messages-content hidden">
+          <h3 class="chapter-title">صور من حكايتنا</h3>
+          <p class="chapter-intro">شوية لقطات وكلام حلو… كل ما أشوفهم أبتسم وأفتكرك.</p>
+          <div class="memory-gallery" aria-label="صور من ذكرياتنا">
+            <button class="memory-photo" type="button" data-caption="بحبك، حتى لو الكلام جه في صورة مسدج صغيرة.">
+              <img src="046bf455-728d-405f-bdea-508ce5633678.jpg" alt="لقطة من مسدج بيننا" loading="lazy">
+              <span>كلمة صغيرة بتفرّح القلب</span>
+            </button>
+            <button class="memory-photo" type="button" data-caption="رسائل وضحك وحاجات بتفضل في البال.">
+              <img src="4198f160-d7ce-46a7-916a-5f0af3ce59c9.jpg" alt="مجموعة من رسائلنا" loading="lazy">
+              <span>ضحكة وسط الكلام</span>
+            </button>
+            <button class="memory-photo" type="button" data-caption="كلام من القلب، وردود كلها مشاعر.">
+              <img src="bbe7fc47-b691-40eb-b29a-c39167c079a0.jpg" alt="رسائل حب متبادلة" loading="lazy">
+              <span>كلام من القلب</span>
+            </button>
+            <button class="memory-photo" type="button" data-caption="لحظة حلوة بنحب نفتكرها.">
+              <img src="f9a332c4-5c95-4379-b84e-5bde828be9c7.jpg" alt="ذكرى مصورة" loading="lazy">
+              <span>ذكرى حلوة</span>
+            </button>
+            <button class="memory-photo" type="button" data-caption="كل مرة بتقولي فيها بحبك، ليها مكانها.">
+              <img src="fd162385-9ba8-4bc5-8b11-189b64a6dcda.jpg" alt="لقطة قصيرة من محادثتنا" loading="lazy">
+              <span>بحبك برضه</span>
+            </button>
+          </div>
+          <form id="message-form" class="message-composer">
+            <textarea id="message-text" maxlength="500" placeholder="اكتبي مسدج عايزة تفضلي فاكرها…" required></textarea>
+            <div class="composer-row">
+              <select id="message-author" aria-label="مين بعت المسدج؟"><option value="من أحمد">من أحمد</option><option value="من ملك">من ملك</option><option value="مننا إحنا الاتنين">مننا إحنا الاتنين</option></select>
+              <button class="send-button" type="submit">احفظي المسدج <span>♥</span></button>
+            </div>
+          </form>
+          <div id="message-list" class="message-list"></div>
+          <div class="chapter-bottom"><span>كل كلمة حلوة تستاهل تفضل</span><span>✦</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="chapter-sorry" class="chapter">
+      <button class="chapter-back" data-back>← رجوع للكروت</button>
+      <article class="chapter-card glass">
+        <p class="chapter-kicker"><span></span> WORDS THAT COME WITH CARE</p>
+        <h2 class="chapter-title">رسالة اعتذار</h2>
+        <p class="chapter-intro">من قلبي يا ملك… عايز أسمعك وأصلّح اللي زعّلك.</p>
+        <div class="dear-note">
+          <p>يا ملك، أنا آسف لو زعلتك أو حسّستك إن كلامك ومشاعرك مش مهمين. والله ماكانش قصدي أوجعك، بس عارف إن ده مايمسحش إحساسك.</p>
+          <p>مش هطلب منك تنسي بسرعة… بس أوعدك إني أسمعك للآخر، وأراجع نفسي، وأخلّي التغيير يبان في أفعالي. إنتِ غالية عليّا وتستاهلي أحسن معاملة وأحنّ قلب.</p>
+          <p class="note-signature">حقك عليّا يا ملك… بحبك. — أحمد</p>
+        </div>
+        <div class="chapter-bottom"><span>الاعتذار بداية، والتغيير هو الدليل</span><span>♥</span></div>
+      </article>
+    </section>
+
+    <section id="chapter-heart-game" class="chapter game-chapter">
+      <button class="chapter-back" data-back>← رجوع للكروت</button>
+      <article class="chapter-card glass">
+        <p class="chapter-kicker"><span></span> OUR LITTLE LOVE GAME</p>
+        <h2 class="chapter-title">لمّة القلوب</h2>
+        <p class="chapter-intro">اقلبي الكروت ودوّري على كل قلب وشبيهه… براحتك، مفيش وقت بيجري.</p>
+        <div class="game-shell">
+          <div id="game-progress" class="story-progress" aria-label="خطوات الحكاية">
+            <i class="current"></i><i></i><i></i>
+          </div>
+          <div id="game-scene" class="game-scene">
+            <span id="game-scene-icon" class="game-scene-icon" aria-hidden="true">☾</span>
+            <span id="game-step-label" class="game-step-label">أول الحكاية · ١ من ٣</span>
+            <h3 id="game-prompt" class="game-prompt">لو خطفنا ساعة لينا… تحبي نقضيها إزاي؟</h3>
+            <p id="game-whisper" class="game-whisper">مفيش إجابة غلط، أنا بس بحب أعرف إيه اللي يفرّحك.</p>
+            <div id="game-choices" class="game-choices">
+              <button class="game-choice" type="button" data-choice="0"><span>☕</span><strong>قعدة هادية وكلام من القلب</strong><small>على رواق… وإحنا الاتنين سوا.</small></button>
+              <button class="game-choice" type="button" data-choice="1"><span>✦</span><strong>نتمشى تحت السما</strong><small>نضحك ونحكي لحد ما الوقت ينسى يجري.</small></button>
+            </div>
+            <div id="game-response" class="game-response hidden" role="status" aria-live="polite"></div>
+            <div id="game-final" class="game-final hidden" role="status" aria-live="polite"></div>
+            <div class="game-controls">
+              <button id="game-next" class="game-next hidden" type="button">كمّلي حكايتنا <span>←</span></button>
+              <button id="game-reset" class="game-reset" type="button">نبدأ من الأول</button>
+            </div>
+          </div>
+        </div>
+        <div class="chapter-bottom"><span>لعبة صغيرة معمولة بحب</span><span>✦</span></div>
+      </article>
+    </section>
+    <section id="chapter-sila" class="chapter sila-chapter">
+      <button class="chapter-back" data-back>← رجوع للكروت</button>
+      <article class="chapter-card glass">
+        <p class="chapter-kicker"><span></span> YOUR LITTLE COMPANION</p>
+        <h2 class="chapter-title">حرري الرفيقة بتاعتك يا لوكه</h2>
+        <p class="chapter-intro">سيلا قطة صغيرة محبوسة… وكل مهمة حنية هتقرّبها خطوة منك.</p>
+        <form id="sila-password-form" class="sila-gate" novalidate>
+          <span class="sila-lock-mark" aria-hidden="true">🐾</span>
+          <h3>باب سيلا</h3>
+          <p>كلمة الباب اللي شفتيها برّه الكارت.</p>
+          <div class="sila-password-row">
+            <input id="sila-password" type="password" autocomplete="off" placeholder="كلمة الدخول" aria-label="كلمة دخول سيلا" required>
+            <button type="submit">افتحي الباب</button>
+          </div>
+          <p id="sila-password-error" class="sila-error" role="status" aria-live="polite"></p>
+        </form>
+        <div id="sila-mission" class="sila-mission hidden">
+          <div class="sila-cage" id="sila-cage" aria-live="polite">
+            <span class="sila-cat" aria-hidden="true">🐈</span>
+            <span class="sila-cage-bars" aria-hidden="true"></span>
+            <span id="sila-status" class="sila-status">مياو… أنا سيلا، مستنية لوكه تساعدني.</span>
+          </div>
+          <div id="sila-task-area" class="sila-task-area">
+            <div class="sila-progress" aria-label="تقدم مهمات سيلا"><i></i><i></i><i></i></div>
+            <p id="sila-task-label" class="sila-task-label"></p>
+            <h3 id="sila-task-title" class="sila-task-title"></h3>
+            <p id="sila-task-copy" class="sila-task-copy"></p>
+            <div id="sila-task-choices" class="sila-task-choices"></div>
+            <div id="sila-star-task" class="sila-star-task hidden">
+              <button type="button" aria-label="نجمة المفتاح الأولى">✦</button>
+              <button type="button" aria-label="نجمة المفتاح الثانية">✧</button>
+              <button type="button" aria-label="نجمة المفتاح الثالثة">✦</button>
+            </div>
+            <p id="sila-task-feedback" class="sila-task-feedback" role="status" aria-live="polite"></p>
+          </div>
+          <div id="sila-rescue" class="sila-rescue hidden" role="status" aria-live="polite">
+            <span aria-hidden="true">🐈‍⬛</span>
+            <h3>سيلا بقت حرة! ♥</h3>
+            <p>من النهارده هتفضل معاكي في كل صفحة، تقدري تفتحي شات وتحكيلها أي حاجة.</p>
+          </div>
+        </div>
+        <div class="chapter-bottom"><span>كل خطوة حنية… مفتاح لباب جديد</span><span>🐾</span></div>
+      </article>
+    </section>
+    <footer class="page-footer">حكايتنا بدأت يوم <span>30 / 05 / 2026</span> <span>·</span> ولسه كل يوم فيها أحلى</footer>
+  </div>
+  <aside id="sila-dock" class="sila-dock hidden" aria-label="رفيقتك سيلا">
+    <p id="sila-bubble" class="sila-bubble"></p>
+    <button id="sila-dock-toggle" class="sila-dock-toggle" type="button" aria-expanded="false" aria-controls="sila-chat-panel">
+      <svg class="sila-dock-art" viewBox="0 0 240 200" aria-hidden="true"><use href="#sila-mascot-symbol"></use></svg><span class="sila-dock-label">سيلا</span><span id="sila-dock-lock" class="sila-dock-lock" aria-hidden="true">🔒</span>
+    </button>
+    <section id="sila-chat-panel" class="sila-chat-panel glass hidden" aria-label="دردشة مع سيلا">
+      <header class="sila-chat-header"><span class="sila-chat-avatar"><svg viewBox="0 0 240 200" aria-hidden="true"><use href="#sila-mascot-symbol"></use></svg></span><div><strong>سيلا</strong><small id="sila-chat-status">لسه مستنية تتحرر</small></div><button id="sila-chat-close" type="button" aria-label="إغلاق المحادثة">×</button></header>
+      <div id="sila-chat-log" class="sila-chat-log" role="log" aria-live="polite"></div>
+      <div id="sila-chat-quick" class="sila-chat-quick">
+        <button type="button">ساعديني في التحدي الحالي</button><button type="button">عايزة أحكيلك حاجة</button><button type="button">بحبك يا سيلا</button>
+      </div>
+      <div id="sila-chat-attachment" class="sila-chat-attachment hidden"><span></span><button type="button" aria-label="إزالة الصورة">×</button></div>
+      <form id="sila-chat-form" class="sila-chat-form">
+        <button id="sila-chat-attach" class="sila-chat-attach" type="button" aria-label="إرفاق صورة" title="اسألي سيلا عن صورة">＋</button>
+        <input id="sila-chat-file" class="hidden" type="file" accept="image/jpeg,image/png,image/webp" aria-label="اختاري صورة لإرسالها لسيلا">
+        <input id="sila-chat-input" maxlength="1000" placeholder="اكتبي لسيلا…" aria-label="رسالتك لسيلا">
+        <button type="submit" aria-label="إرسال الرسالة">↑</button>
+      </form>
+      <button id="sila-chat-mission" class="sila-chat-mission" type="button">روحي لمهمة تحرير سيلا</button>
+    </section>
+  </aside>
+  <dialog id="photo-viewer" class="photo-viewer" aria-label="عرض الصورة">
+    <button id="photo-viewer-close" class="photo-viewer-close" type="button" aria-label="إغلاق الصورة">×</button>
+    <img id="photo-viewer-image" alt="">
+    <p id="photo-viewer-caption"></p>
+    <button id="photo-viewer-ask-sila" class="photo-viewer-ask-sila" type="button">اسألي سيلا عن الذكرى</button>
+  </dialog>
+
+  <script>
+    (() => {
+      'use strict';
+      const PASSWORD = '3005';
+      const MESSAGES_PASSWORD = 'malak';
+      const SILA_PASSWORD = 'سيلا';
+      const START_DATE_UTC = Date.UTC(2026, 4, 30);
+      const $ = (selector, root = document) => root.querySelector(selector);
+      const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+      const input = $('#entry-code');
+      const dots = $$('.pin-display i');
+      const lock = $('#lock-screen');
+      const app = $('#app-shell');
+      const home = $('#home-view');
+      const toastNode = $('#toast');
+      const memoryAudio = $('#memory-audio');
+      const audioStatus = $('#audio-status');
+      const musicPlayer = $('#music-player');
+      const musicToggle = $('#music-toggle');
+      const musicNext = $('#music-next');
+      const musicTrackTitle = $('#music-track-title');
+      const musicTracks = [
+        { src: 'WhatsApp%20Audio%202026-11-21%20at%2011.22.44%20PM.mpeg', title: 'موسيقى حكايتنا · المقطع الأول' },
+        { src: 'main/WhatsApp%20Audio%202026-11-21%20at%209.47.15%20PM.mpeg', title: 'موسيقى حكايتنا · المقطع الثاني' }
+      ];
+      let musicTrackIndex = 0;
+      const photoViewer = $('#photo-viewer');
+      let messagesUnlocked = false;
+      let audioStarted = false;
+      let toastTimer;
+      let silaStarCount = 0;
+      let silaChatStarted = false;
+      let silaWelcomeTimer;
+      let silaTypeTimer;
+      let silaNoticeTimer;
+      let pendingSilaImage = null;
+      const silaState = loadSilaState();
+
+      function loadSilaState() {
+        try {
+          const saved = JSON.parse(localStorage.getItem('malak-sila-state') || '{}');
+          return {
+            stage: Number.isInteger(saved.stage) ? Math.min(3, Math.max(0, saved.stage)) : 0,
+            freed: saved.freed === true
+          };
+        } catch (error) {
+          console.warn('Could not read Sila mission progress:', error);
+          return { stage: 0, freed: false };
+        }
+      }
+
+      function saveSilaState() {
+        try {
+          localStorage.setItem('malak-sila-state', JSON.stringify(silaState));
+        } catch (error) {
+          console.error('Could not save Sila mission progress:', error);
+          showToast('ماقدرتش أحفظ تقدم مهمة سيلا على الجهاز.');
+        }
+      }
+
+      function paintPin() {
+        dots.forEach((dot, index) => dot.classList.toggle('filled', index < input.value.length));
+      }
+
+      function unlock() {
+        startMemoryAudio();
+        lock.classList.add('unlocking');
+        window.setTimeout(() => {
+          lock.classList.add('hidden');
+          app.classList.remove('hidden');
+          updateDays();
+          $('#sila-dock').classList.remove('hidden');
+          updateSilaDock('home');
+          showSilaWelcome();
+        }, 520);
+      }
+
+      function submitPin(event) {
+        if (event) event.preventDefault();
+        if (input.value === PASSWORD) {
+          $('#lock-error').textContent = '';
+          unlock();
+          return;
+        }
+        $('#lock-error').textContent = 'مش دي كلمة السر… جرّبي تاني يا ملك ♥';
+        input.value = '';
+        paintPin();
+      }
+
+      function addDigit(digit) {
+        if (input.value.length >= 4) return;
+        input.value += digit;
+        paintPin();
+        $('#lock-error').textContent = '';
+        if (input.value.length === 4) submitPin();
+      }
+
+      $$('.keypad [data-digit]').forEach(button => button.addEventListener('click', () => addDigit(button.dataset.digit)));
+      $('.key-clear').addEventListener('click', () => {
+        input.value = input.value.slice(0, -1);
+        paintPin();
+        $('#lock-error').textContent = '';
+      });
+      $('#login-form').addEventListener('submit', submitPin);
+      window.addEventListener('keydown', event => {
+        if (lock.classList.contains('hidden')) return;
+        if (/^\d$/.test(event.key)) addDigit(event.key);
+        if (event.key === 'Backspace') {
+          input.value = input.value.slice(0, -1);
+          paintPin();
+          $('#lock-error').textContent = '';
+        }
+      });
+
+      function updateDays() {
+        const now = new Date();
+        const todayUtc = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+        const days = Math.max(0, Math.floor((todayUtc - START_DATE_UTC) / 86400000));
+        $('#days-count').textContent = days;
+      }
+
+      function showToast(message) {
+        toastNode.textContent = message;
+        toastNode.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastNode.classList.remove('show'), 2300);
+      }
+
+      const storySteps = [
+        {
+          icon: '☾',
+          label: 'أول الحكاية · ١ من ٣',
+          prompt: 'لو خطفنا ساعة لينا… تحبي نقضيها إزاي؟',
+          whisper: 'مفيش إجابة غلط، أنا بس بحب أعرف إيه اللي يفرّحك.',
+          options: [
+            { icon: '☕', title: 'قعدة هادية وكلام من القلب', detail: 'على رواق… وإحنا الاتنين سوا.', reaction: 'اختيارك ده حلو أوي… أحلى قعدة عندي هي اللي تبقي فيها جنبي، حتى لو ماعملناش حاجة غير إننا نحكي.' },
+            { icon: '✦', title: 'نتمشى تحت السما', detail: 'نضحك ونحكي لحد ما الوقت ينسى يجري.', reaction: 'اتفقنا… نمشي على مهِلنا، ونحكي في كل حاجة، وأفضل أسمع ضحكتك طول الطريق.' }
+          ]
+        },
+        {
+          icon: '♡',
+          label: 'حاجة بتفرّح القلب · ٢ من ٣',
+          prompt: 'إيه أكتر حاجة تحبيها لما يومك يبقى طويل؟',
+          whisper: 'نفسي أكون عارف دايمًا إزاي أهوّن عليكي.',
+          options: [
+            { icon: '♫', title: 'أحكيلك كل اللي حصل وتسمعيني', detail: 'من غير استعجال… بس تكوني معايا.', reaction: 'وهسمعك للآخر يا ملك… كل تفصيلة منك تهمني، ومشاعرك عمرها ما تكون حاجة صغيرة عندي.' },
+            { icon: '☼', title: 'تضحكيني وتفصليني عن الدنيا', detail: 'بأي حكاية سخيفة منك.', reaction: 'خلاص، مهمتي أخطف منك ضحكة… ولو اضطرّيت أحكي أسخف نكتة في التاريخ.' }
+          ]
+        },
+        {
+          icon: '✉',
+          label: 'حاجة تفضل معاكي · ٣ من ٣',
+          prompt: 'لو هسيبلك حاجة حلوة تفتحيها وقت ما توحشيني… تختاري إيه؟',
+          whisper: 'آخر اختيار… وبعده هتلاقي رسالة صغيرة من قلبي.',
+          options: [
+            { icon: '♫', title: 'رسالة صوتية تسمعيها وقت ما تحبي', detail: 'صوتي يقولك إنك غالية عليّا.', reaction: 'هسيبلك صوتي قريب منك… عشان كل ما تسمعيه تفتكري إن في حد بيحبك وبيختار يطمن عليكي.' },
+            { icon: '♡', title: 'جواب صغير مكتوب بإيدي', detail: 'كلام يفضل معاكي وتحتفظي بيه.', reaction: 'هكتبلك كلام من قلبي… وكل مرة ترجعي تقريه تلاقي فيه حضن صغير مستنيكي.' }
+          ]
+        }
+      ];
+      let storyStepIndex = 0;
+      let storyChoices = [];
+
+      function renderStoryStep() {
+        const step = storySteps[storyStepIndex];
+        const scene = $('#game-scene');
+        scene.classList.remove('game-complete');
+        $('#game-scene-icon').textContent = step.icon;
+        $('#game-step-label').textContent = step.label;
+        $('#game-prompt').textContent = step.prompt;
+        $('#game-whisper').textContent = step.whisper;
+        $('#game-response').classList.add('hidden');
+        $('#game-response').textContent = '';
+        $('#game-final').classList.add('hidden');
+        $('#game-final').replaceChildren();
+        $('#game-next').classList.add('hidden');
+        $('#game-next').innerHTML = 'كمّلي حكايتنا <span>←</span>';
+        $('#game-choices').classList.remove('hidden');
+        $('#game-choices').replaceChildren();
+        $('#game-progress').querySelectorAll('i').forEach((dot, index) => {
+          dot.classList.toggle('current', index === storyStepIndex);
+          dot.classList.toggle('done', index < storyStepIndex);
+        });
+        step.options.forEach((option, index) => {
+          const button = document.createElement('button');
+          button.className = 'game-choice';
+          button.type = 'button';
+          button.dataset.choice = index;
+          const icon = document.createElement('span');
+          icon.setAttribute('aria-hidden', 'true');
+          icon.textContent = option.icon;
+          const title = document.createElement('strong');
+          title.textContent = option.title;
+          const detail = document.createElement('small');
+          detail.textContent = option.detail;
+          button.append(icon, title, detail);
+          $('#game-choices').append(button);
+        });
+      }
+
+      function finishLoveStory() {
+        $('#game-progress').querySelectorAll('i').forEach(dot => {
+          dot.classList.remove('current');
+          dot.classList.add('done');
+        });
+        $('#game-scene').classList.add('game-complete');
+        $('#game-scene-icon').textContent = '♥';
+        $('#game-step-label').textContent = 'حكايتنا إحنا الاتنين';
+        $('#game-prompt').textContent = 'أحلى اختيار… إننا نفضل سوا.';
+        $('#game-whisper').textContent = 'بصي على الحاجات الحلوة اللي اختارتيها:';
+        $('#game-choices').classList.add('hidden');
+        $('#game-response').classList.add('hidden');
+        const finalNote = $('#game-final');
+        finalNote.replaceChildren();
+        const selectedMoments = document.createElement('p');
+        selectedMoments.textContent = `${storyChoices[0].title}، و${storyChoices[1].title}، و${storyChoices[2].title}… دي تفاصيل بسيطة، بس معاكي كل حاجة بتحلى.`;
+        const signoff = document.createElement('span');
+        signoff.textContent = 'بحبك يا ملك، وكل يوم نفسي أكون سبب في ضحكتك. — أحمد ♥';
+        finalNote.append(selectedMoments, signoff);
+        finalNote.classList.remove('hidden');
+        $('#game-next').classList.add('hidden');
+        announceSila('خلصتي حكاية القلوب يا ملك! عندي ليكي سر صغير… افتحي الشات ♥');
+      }
+
+      function resetHeartGame() {
+        storyStepIndex = 0;
+        storyChoices = [];
+        renderStoryStep();
+      }
+
+      $('#game-choices').addEventListener('click', event => {
+        const choiceButton = event.target.closest('.game-choice');
+        if (!choiceButton) return;
+        const option = storySteps[storyStepIndex].options[Number(choiceButton.dataset.choice)];
+        if (!option) return;
+        storyChoices[storyStepIndex] = option;
+        $('#game-choices').classList.add('hidden');
+        $('#game-response').textContent = option.reaction;
+        $('#game-response').classList.remove('hidden');
+        const nextButton = $('#game-next');
+        nextButton.classList.remove('hidden');
+        nextButton.querySelector('span').textContent = '←';
+        if (storyStepIndex === storySteps.length - 1) nextButton.firstChild.textContent = 'شوّفي رسالتك ';
+      });
+
+      $('#game-next').addEventListener('click', () => {
+        if (storyStepIndex >= storySteps.length - 1) {
+          finishLoveStory();
+          return;
+        }
+        storyStepIndex += 1;
+        renderStoryStep();
+      });
+      $('#game-reset').addEventListener('click', resetHeartGame);
+      resetHeartGame();
+
+      const silaTasks = [
+        {
+          title: 'أول حاجة… طمّنيها',
+          copy: 'سيلا خايفة جوه القفص. إيه أول حاجة تعمليها عشان تحس بالأمان؟',
+          choices: ['أكلمها بصوت هادي وأقولها إني جنبها.', 'أقعد قريب منها وأديها وقتها على راحتها.']
+        },
+        {
+          title: 'اختاري هدية صغيرة',
+          copy: 'سيلا بدأت تطمّن… تختاري لها إيه عشان تفرح؟',
+          choices: ['بطانية ناعمة ودافية.', 'لعبة صغيرة تلعب بيها وإنتي معاها.']
+        }
+      ];
+
+      function renderSilaTask() {
+        const mission = $('#sila-mission');
+        const taskArea = $('#sila-task-area');
+        const rescue = $('#sila-rescue');
+        const cage = $('#sila-cage');
+        mission.classList.remove('hidden');
+        if (silaState.freed) {
+          cage.classList.add('is-free');
+          $('#sila-status').textContent = 'مياو! أنا حرة يا لوكه… وهفضل معاكي في كل حتة ♥';
+          taskArea.classList.add('hidden');
+          rescue.classList.remove('hidden');
+          return;
+        }
+        cage.classList.remove('is-free');
+        rescue.classList.add('hidden');
+        taskArea.classList.remove('hidden');
+        const progress = $$('.sila-progress i');
+        progress.forEach((item, index) => item.classList.toggle('done', index < silaState.stage));
+        $('#sila-task-feedback').textContent = '';
+        const choices = $('#sila-task-choices');
+        const starTask = $('#sila-star-task');
+        choices.replaceChildren();
+        if (silaState.stage < silaTasks.length) {
+          const task = silaTasks[silaState.stage];
+          $('#sila-task-label').textContent = `المهمة ${silaState.stage + 1} من ٣`;
+          $('#sila-task-title').textContent = task.title;
+          $('#sila-task-copy').textContent = task.copy;
+          $('#sila-status').textContent = silaState.stage === 0
+            ? 'مياو… خايفة شوية، بس صوتك هيطمني.'
+            : 'أنا بدأت أطمن يا لوكه… فاضل مفتاح الباب.';
+          starTask.classList.add('hidden');
+          task.choices.forEach((choice, index) => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.dataset.answer = String(index);
+            button.textContent = choice;
+            choices.append(button);
+          });
+          return;
+        }
+        $('#sila-task-label').textContent = 'المهمة ٣ من ٣';
+        $('#sila-task-title').textContent = 'لمّي نجوم مفتاحها';
+        $('#sila-task-copy').textContent = 'المفتاح اتكوّن من طيبتك… دوسي على النجوم التلاتة عشان تفتحي القفص.';
+        $('#sila-status').textContent = 'شايفة المفتاح بينور… قربنا يا لوكه!';
+        starTask.classList.remove('hidden');
+      }
+
+      function freeSila() {
+        silaState.stage = 3;
+        silaState.freed = true;
+        saveSilaState();
+        $('#sila-cage').classList.add('is-free');
+        $('#sila-status').textContent = 'مياو! أنا حرة يا لوكه… وهفضل معاكي في كل حتة ♥';
+        $$('.sila-progress i').forEach(item => item.classList.add('done'));
+        $('#sila-task-area').classList.add('hidden');
+        $('#sila-rescue').classList.remove('hidden');
+        updateSilaDock('sila');
+        showToast('سيلا بقت حرة… وهتفضل معاكي ♥');
+        announceSila('تحررت! شكرًا يا ملك… من دلوقتي هفضل جنبك وأساعدك ♥');
+      }
+
+      $('#sila-password-form').addEventListener('submit', event => {
+        event.preventDefault();
+        const passwordInput = $('#sila-password');
+        if (passwordInput.value.trim() !== SILA_PASSWORD) {
+          $('#sila-password-error').textContent = 'دي مش كلمة الباب… جرّبي تاني يا لوكه.';
+          passwordInput.value = '';
+          passwordInput.focus();
+          return;
+        }
+        $('#sila-password-error').textContent = '';
+        $('#sila-password-form').classList.add('hidden');
+        renderSilaTask();
+      });
+
+      $('#sila-task-choices').addEventListener('click', event => {
+        const choice = event.target.closest('button[data-answer]');
+        if (!choice || silaState.stage > 1) return;
+        const wasFirstTask = silaState.stage === 0;
+        silaState.stage += 1;
+        saveSilaState();
+        renderSilaTask();
+        $('#sila-task-feedback').textContent = wasFirstTask
+          ? 'سيلا سمعتك وبدأت تهدى… ♥'
+          : 'الهدية فرّحت سيلا… المفتاح بقى قريب!';
+      });
+
+      $('#sila-star-task').addEventListener('click', event => {
+        const star = event.target.closest('button');
+        if (!star || star.disabled || silaState.stage !== 2) return;
+        star.disabled = true;
+        star.classList.add('collected');
+        silaStarCount += 1;
+        $('#sila-task-feedback').textContent = `لمّيتي ${silaStarCount} من ٣ نجوم المفتاح.`;
+        if (silaStarCount === 3) freeSila();
+      });
+
+      function currentSilaPlace() {
+        const activeChapter = $('.chapter.active');
+        if (!activeChapter) return 'صفحتك الرئيسية';
+        const places = {
+          'chapter-for-you': 'رسالة أحمد ليكي',
+          'chapter-messages': 'مسدجاتكم وذكرياتكم',
+          'chapter-sorry': 'رسالة الاعتذار',
+          'chapter-heart-game': 'لعبة القلوب',
+          'chapter-sila': 'مهمتها عشان تتحرر'
+        };
+        return places[activeChapter.id] || 'حكايتكم';
+      }
+
+      function updateSilaDock(place) {
+        const freed = silaState.freed;
+        $('#sila-dock-lock').classList.toggle('hidden', freed);
+        $('#sila-chat-status').textContent = freed ? 'رفيقتك في كل صفحة ♥' : 'لسه مستنية تتحرر';
+        $('#sila-chat-mission').classList.toggle('hidden', freed);
+        $('#sila-bubble').textContent = freed
+          ? `أنا معاكي في ${place === 'home' ? 'صفحتك الرئيسية' : place} يا لوكه ♥`
+          : 'أنا سيلا… ساعديني أطلع من القفص يا لوكه.';
+      }
+
+      const silaWelcomeMessage = 'أهلاً يا ملك! وحشتينا ❤️ جاهزة نكتشف أسرار جديدة؟';
+
+      function showSilaWelcome() {
+        const mascot = $('#sila-home-mascot');
+        const text = $('#sila-welcome-text');
+        const characters = Array.from(silaWelcomeMessage);
+        let index = 0;
+        clearTimeout(silaWelcomeTimer);
+        clearTimeout(silaTypeTimer);
+        text.textContent = '';
+        mascot.classList.add('is-active', 'is-welcoming');
+        const typeNext = () => {
+          text.textContent += characters[index++];
+          if (index < characters.length) {
+            silaTypeTimer = window.setTimeout(typeNext, 34);
+          } else {
+            silaWelcomeTimer = window.setTimeout(() => mascot.classList.remove('is-welcoming'), 6500);
+          }
+        };
+        typeNext();
+      }
+
+      function announceSila(message) {
+        $('#sila-bubble').textContent = message;
+        clearTimeout(silaNoticeTimer);
+        silaNoticeTimer = window.setTimeout(() => updateSilaDock(currentSilaPlace()), 6500);
+      }
+
+      function openSilaChat() {
+        $('#sila-chat-panel').classList.remove('hidden');
+        $('#sila-dock-toggle').setAttribute('aria-expanded', 'true');
+        if (!silaChatStarted) respondToSila('');
+      }
+
+      $('#sila-home-mascot').addEventListener('click', () => {
+        clearTimeout(silaWelcomeTimer);
+        $('#sila-home-mascot').classList.remove('is-welcoming');
+        openSilaChat();
+      });
+
+      function addSilaChatMessage(text, fromUser) {
+        const message = document.createElement('p');
+        message.className = `sila-chat-message${fromUser ? ' user' : ''}`;
+        message.textContent = text;
+        $('#sila-chat-log').append(message);
+        $('#sila-chat-log').scrollTop = $('#sila-chat-log').scrollHeight;
+      }
+
+      const silaConversation = [];
+      let silaReplyPending = false;
+      let silaRequestController = null;
+
+      function getSilaPageContext() {
+        const parts = [`الصفحة الحالية: ${currentSilaPlace()}.`];
+        parts.push(silaState.freed
+          ? 'سيلا تحررت وأصبحت رفيقة ملك.'
+          : `سيلا لم تتحرر بعد؛ تقدّم مهمتها ${silaState.stage} من 3.`);
+        const activeChapter = $('.chapter.active');
+        if (activeChapter && activeChapter.id === 'chapter-heart-game') {
+          const prompt = $('#game-prompt').textContent.trim();
+          const choices = $$('#game-choices .game-choice').map(choice => choice.innerText.trim()).join(' | ');
+          const response = $('#game-response').textContent.trim();
+          const ending = $('#game-final').textContent.trim();
+          parts.push(`لعبة القلوب: ${$('#game-step-label').textContent.trim()}. ${prompt}`);
+          if (choices) parts.push(`الاختيارات الظاهرة: ${choices}.`);
+          if (response) parts.push(`آخر تفاعل: ${response}.`);
+          if (ending) parts.push(`نهاية اللعبة: ${ending}.`);
+        }
+        const memories = $$('.memory-photo').map(button => {
+          const image = $('img', button);
+          return `${button.querySelector('span').textContent.trim()}: ${image.alt}. ${button.dataset.caption}`;
+        });
+        if (memories.length) parts.push(`ذكريات الموقع المتاحة للعرض: ${memories.join(' | ')}`);
+        return parts.join('\n').slice(0, 2000);
+      }
+
+      async function makeSilaImage(source) {
+        const image = new Image();
+        image.src = source;
+        await new Promise((resolve, reject) => {
+          if (image.complete) return image.naturalWidth ? resolve() : reject(new Error('Could not load the selected image.'));
+          image.onload = resolve;
+          image.onerror = () => reject(new Error('Could not load the selected image.'));
+        });
+        if (image.naturalWidth * image.naturalHeight > 40000000) throw new Error('The selected image is too large to process.');
+        const scale = Math.min(1, 768 / Math.max(image.naturalWidth, image.naturalHeight));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+        canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+        const context = canvas.getContext('2d');
+        if (!context) throw new Error('Image processing is unavailable.');
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.72);
+        if (dataUrl.length > 1200000) throw new Error('The selected image is too large to send.');
+        return dataUrl;
+      }
+
+      function setSilaAttachment(dataUrl, label) {
+        pendingSilaImage = dataUrl;
+        const attachment = $('#sila-chat-attachment');
+        attachment.querySelector('span').textContent = `صورة مرفقة: ${label}`;
+        attachment.classList.remove('hidden');
+      }
+
+      $('#sila-chat-attach').addEventListener('click', () => $('#sila-chat-file').click());
+      $('#sila-chat-file').addEventListener('change', async event => {
+        const file = event.target.files[0];
+        if (!file) return;
+        if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type) || file.size > 8 * 1024 * 1024) {
+          showToast('اختاري صورة JPG أو PNG أو WebP أصغر من 8 ميجابايت.');
+          event.target.value = '';
+          return;
+        }
+        const objectUrl = URL.createObjectURL(file);
+        try {
+          setSilaAttachment(await makeSilaImage(objectUrl), file.name);
+        } catch (error) {
+          showToast('ماقدرتش أجهّز الصورة… جرّبي صورة تانية.');
+          console.error('Could not prepare an image for Sila:', error);
+        } finally {
+          URL.revokeObjectURL(objectUrl);
+          event.target.value = '';
+        }
+      });
+      $('#sila-chat-attachment button').addEventListener('click', () => {
+        pendingSilaImage = null;
+        $('#sila-chat-attachment').classList.add('hidden');
+      });
+
+      async function respondToSila(message, imageDataUrl = null) {
+        if (!silaChatStarted) {
+          addSilaChatMessage(silaState.freed
+            ? 'مياو يا ملك! أنا سيلا، صاحبتك السرية… احكيلي ♥'
+            : 'مياو… أنا سيلا، محبوسة ومستنية مهماتك عشان أتحرر.', false);
+          silaChatStarted = true;
+        }
+        if (message) addSilaChatMessage(`${message}${imageDataUrl ? ' · 📷 صورة مرفقة' : ''}`, true);
+        if (!message) return;
+        if (silaReplyPending) return;
+        silaReplyPending = true;
+        const requestController = new AbortController();
+        silaRequestController = requestController;
+        const replyNode = document.createElement('p');
+        replyNode.className = 'sila-chat-message sila-typing';
+        replyNode.setAttribute('role', 'status');
+        replyNode.setAttribute('aria-label', 'سيلا تكتب ردًا');
+        for (let dot = 0; dot < 3; dot++) replyNode.append(document.createElement('i'));
+        $('#sila-chat-log').append(replyNode);
+        const form = $('#sila-chat-form');
+        const submitButton = form.querySelector('[type="submit"]');
+        const quickButtons = $$('#sila-chat-quick button');
+        submitButton.disabled = true;
+        quickButtons.forEach(button => { button.disabled = true; });
+        try {
+          const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            signal: requestController.signal,
+            body: JSON.stringify({
+              messages: [...silaConversation, { role: 'user', content: message }].slice(-12),
+              context: getSilaPageContext(),
+              imageDataUrl
+            })
+          });
+          const result = await response.json();
+          if (!response.ok) {
+            const serviceError = new Error(typeof result.error === 'string' ? result.error.slice(0, 240) : 'الخادم رفض الرسالة.');
+            serviceError.name = 'ChatServiceError';
+            throw serviceError;
+          }
+          if (typeof result.reply !== 'string' || !result.reply.trim()) throw new Error('Empty response');
+          replyNode.textContent = result.reply.trim();
+          replyNode.removeAttribute('aria-label');
+          replyNode.removeAttribute('role');
+          silaConversation.push({ role: 'user', content: message }, { role: 'assistant', content: result.reply.trim() });
+          silaConversation.splice(0, Math.max(0, silaConversation.length - 12));
+        } catch (error) {
+          if (!requestController.signal.aborted) {
+            replyNode.classList.remove('sila-typing');
+            replyNode.classList.add('error');
+            replyNode.textContent = error.name === 'ChatServiceError'
+              ? error.message
+              : 'مش عارفة أوصل لخادم سيلا. شغّليه من start-sila.ps1 وافتحي الموقع على http://127.0.0.1:8000.';
+            replyNode.removeAttribute('aria-label');
+            replyNode.removeAttribute('role');
+            console.error('Sila could not get an OpenAI reply:', error);
+          }
+        } finally {
+          if (silaRequestController === requestController) silaRequestController = null;
+          silaReplyPending = false;
+          submitButton.disabled = false;
+          quickButtons.forEach(button => { button.disabled = false; });
+        }
+      }
+
+      $('#sila-dock-toggle').addEventListener('click', () => {
+        const panel = $('#sila-chat-panel');
+        const opening = panel.classList.contains('hidden');
+        if (opening) {
+          openSilaChat();
+        } else {
+          panel.classList.add('hidden');
+          $('#sila-dock-toggle').setAttribute('aria-expanded', 'false');
+        }
+      });
+      $('#sila-chat-close').addEventListener('click', () => {
+        $('#sila-chat-panel').classList.add('hidden');
+        $('#sila-dock-toggle').setAttribute('aria-expanded', 'false');
+      });
+      $('#sila-chat-form').addEventListener('submit', event => {
+        event.preventDefault();
+        const field = $('#sila-chat-input');
+        const message = field.value.trim();
+        const imageDataUrl = pendingSilaImage;
+        if ((!message && !imageDataUrl) || silaReplyPending) return;
+        respondToSila(message || 'إيه رأيك في الصورة دي؟', imageDataUrl);
+        field.value = '';
+        pendingSilaImage = null;
+        $('#sila-chat-attachment').classList.add('hidden');
+      });
+      $('#sila-chat-quick').addEventListener('click', event => {
+        const button = event.target.closest('button');
+        if (button && !silaReplyPending) respondToSila(button.textContent);
+      });
+      $('#sila-chat-mission').addEventListener('click', () => {
+        $('#sila-chat-panel').classList.add('hidden');
+        $('#sila-dock-toggle').setAttribute('aria-expanded', 'false');
+        openChapter('sila');
+      });
+
+      function closeChapters() {
+        $$('.chapter').forEach(section => section.classList.remove('active'));
+        home.classList.remove('hidden');
+        updateSilaDock('home');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function openChapter(name) {
+        const chapter = $(`#chapter-${name}`);
+        if (!chapter) return;
+        home.classList.add('hidden');
+        $$('.chapter').forEach(section => section.classList.toggle('active', section === chapter));
+        if (name === 'messages' && messagesUnlocked) renderMessages();
+        updateSilaDock(currentSilaPlace());
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      $$('[data-chapter]').forEach(card => card.addEventListener('click', () => openChapter(card.dataset.chapter)));
+      $$('[data-back]').forEach(button => button.addEventListener('click', closeChapters));
+      $('#home-link').addEventListener('click', event => {
+        event.preventDefault();
+        closeChapters();
+      });
+      $('#logout-button').addEventListener('click', () => {
+        clearTimeout(silaWelcomeTimer);
+        clearTimeout(silaTypeTimer);
+        $('#sila-home-mascot').classList.remove('is-active', 'is-welcoming');
+        if (silaRequestController) silaRequestController.abort();
+        silaConversation.length = 0;
+        silaChatStarted = false;
+        $('#sila-chat-log').replaceChildren();
+        pendingSilaImage = null;
+        $('#sila-chat-attachment').classList.add('hidden');
+        $('#sila-chat-file').value = '';
+        memoryAudio.pause();
+        audioStarted = false;
+        app.classList.add('hidden');
+        lock.classList.remove('hidden', 'unlocking');
+        $('#sila-dock').classList.add('hidden');
+        $('#sila-chat-panel').classList.add('hidden');
+        $('#sila-dock-toggle').setAttribute('aria-expanded', 'false');
+        input.value = '';
+        paintPin();
+        $('#lock-error').textContent = '';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      window.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && !photoViewer.open) closeChapters();
+      });
+
+      function startMemoryAudio() {
+        if (memoryAudio.ended) memoryAudio.currentTime = 0;
+        audioStarted = true;
+        audioStatus.textContent = 'بنشغّلها يا ملك…';
+        const playback = memoryAudio.play();
+        if (!playback) {
+          audioStatus.textContent = 'لو ما بدأتش لوحدها، دوسي على ♫.';
+          return;
+        }
+        playback.then(() => {
+          audioStatus.textContent = 'شغّالة معاكي وبتتكرر ♥';
+          updateMusicControls();
+        }).catch(error => {
+          if (error.name === 'AbortError') return;
+          audioStatus.textContent = error.name === 'NotAllowedError'
+            ? 'دوسي على ♫ عشان المتصفح يسمح بتشغيلها.'
+            : 'مش عارف أشغّلها دلوقتي… جرّبي تاني من ♫.';
+          updateMusicControls();
+          if (error.name !== 'NotAllowedError') console.warn('Could not play the memory audio:', error);
+        });
+      }
+
+      function updateMusicControls() {
+        const playing = !memoryAudio.paused && !memoryAudio.ended;
+        musicPlayer.classList.toggle('is-playing', playing);
+        musicToggle.setAttribute('aria-pressed', String(playing));
+        musicToggle.setAttribute('aria-label', playing ? 'إيقاف الموسيقى' : 'تشغيل الموسيقى');
+      }
+
+      memoryAudio.addEventListener('playing', () => {
+        audioStatus.textContent = 'شغّالة معاكي وبتتكرر ♥';
+        updateMusicControls();
+      });
+      memoryAudio.addEventListener('pause', () => {
+        updateMusicControls();
+        if (audioStarted && !memoryAudio.ended) audioStatus.textContent = 'وقفتها شوية… دوسي على ♫ ترجعلّك.';
+      });
+      memoryAudio.addEventListener('error', () => {
+        audioStatus.textContent = 'مش لاقية ملف الصوت… اتأكدي إن ملف الصوت جنب الصفحة.';
+        updateMusicControls();
+        console.error('Could not load the memory audio file.');
+      });
+      memoryAudio.loop = true;
+      musicNext.addEventListener('click', () => {
+        const wasPlaying = !memoryAudio.paused && !memoryAudio.ended;
+        musicTrackIndex = (musicTrackIndex + 1) % musicTracks.length;
+        $('source', memoryAudio).src = musicTracks[musicTrackIndex].src;
+        musicTrackTitle.textContent = musicTracks[musicTrackIndex].title;
+        memoryAudio.load();
+        if (wasPlaying) {
+          startMemoryAudio();
+        } else {
+          audioStatus.textContent = `${musicTracks[musicTrackIndex].title} جاهز… دوسي على ♫ لتشغيله.`;
+          updateMusicControls();
+        }
+      });
+      musicToggle.addEventListener('click', () => {
+        if (memoryAudio.paused || memoryAudio.ended) {
+          startMemoryAudio();
+          return;
+        }
+        memoryAudio.pause();
+      });
+
+      $('#messages-password-form').addEventListener('submit', event => {
+        event.preventDefault();
+        const passwordInput = $('#messages-password');
+        if (passwordInput.value !== MESSAGES_PASSWORD) {
+          $('#messages-password-error').textContent = 'كلمة السر مش مظبوطة… جرّبي تاني ♥';
+          passwordInput.value = '';
+          passwordInput.focus();
+          return;
+        }
+        messagesUnlocked = true;
+        $('#messages-password-error').textContent = '';
+        $('#messages-password-form').classList.add('hidden');
+        $('#messages-content').classList.remove('hidden');
+        renderMessages();
+      });
+
+      $$('.memory-photo').forEach(button => button.addEventListener('click', () => {
+        const image = $('img', button);
+        $('#photo-viewer-image').src = image.src;
+        $('#photo-viewer-image').alt = image.alt;
+        $('#photo-viewer-caption').textContent = button.dataset.caption;
+        photoViewer.showModal();
+      }));
+      $('#photo-viewer-ask-sila').addEventListener('click', async event => {
+        const button = event.currentTarget;
+        button.disabled = true;
+        try {
+          const imageDataUrl = await makeSilaImage($('#photo-viewer-image').src);
+          const caption = $('#photo-viewer-caption').textContent.trim();
+          setSilaAttachment(imageDataUrl, 'ذكرى من الموقع');
+          $('#sila-chat-input').value = `إيه رأيك في الصورة دي؟ ${caption}`;
+          photoViewer.close();
+          openSilaChat();
+          $('#sila-chat-input').focus();
+        } catch (error) {
+          showToast('ماقدرتش أجهّز الصورة لسيلا… جرّبي تاني.');
+          console.error('Could not attach the selected memory:', error);
+        } finally {
+          button.disabled = false;
+        }
+      });
+      $('#photo-viewer-close').addEventListener('click', () => photoViewer.close());
+      photoViewer.addEventListener('click', event => {
+        if (event.target === photoViewer) photoViewer.close();
+      });
+
+      function loadMessages() {
+        try {
+          const value = JSON.parse(localStorage.getItem('malak-saved-messages') || '[]');
+          return Array.isArray(value) ? value.filter(item => item && typeof item.text === 'string') : [];
+        } catch (error) {
+          console.warn('Could not read saved messages:', error);
+          return [];
+        }
+      }
+
+      function saveMessages(messages) {
+        try {
+          localStorage.setItem('malak-saved-messages', JSON.stringify(messages));
+          return true;
+        } catch (error) {
+          console.error('Could not save this message:', error);
+          showToast('ماعرفتش أحفظ المسدج على الجهاز.');
+          return false;
+        }
+      }
+
+      function renderMessages() {
+        const list = $('#message-list');
+        const messages = loadMessages();
+        list.replaceChildren();
+        if (!messages.length) {
+          const empty = document.createElement('div');
+          empty.className = 'empty-messages';
+          empty.textContent = 'لسه مفيش مسدجات محفوظة… أول واحدة ممكن تكون دلوقتي.';
+          list.append(empty);
+          return;
+        }
+        messages.slice().reverse().forEach(message => {
+          const item = document.createElement('article');
+          item.className = 'message-item';
+          const meta = document.createElement('div');
+          meta.className = 'message-meta';
+          const author = document.createElement('strong');
+          author.textContent = message.author;
+          const date = document.createElement('span');
+          date.textContent = message.date;
+          const remove = document.createElement('button');
+          remove.className = 'delete-message';
+          remove.type = 'button';
+          remove.setAttribute('aria-label', 'حذف المسدج');
+          remove.textContent = '×';
+          remove.addEventListener('click', () => {
+            if (!window.confirm('تحبي تمسحي المسدج دي؟')) return;
+            saveMessages(loadMessages().filter(saved => saved.id !== message.id));
+            renderMessages();
+          });
+          const text = document.createElement('p');
+          text.textContent = message.text;
+          meta.append(author, date, remove);
+          item.append(meta, text);
+          list.append(item);
+        });
+      }
+
+      $('#message-form').addEventListener('submit', event => {
+        event.preventDefault();
+        const field = $('#message-text');
+        const text = field.value.trim();
+        if (!text) {
+          showToast('اكتبي المسدج الأول ♥');
+          return;
+        }
+        const messages = loadMessages();
+        messages.push({
+          id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+          text,
+          author: $('#message-author').value,
+          date: new Intl.DateTimeFormat('ar-EG', { day: 'numeric', month: 'short', year: 'numeric' }).format(new Date())
+        });
+        if (!saveMessages(messages)) return;
+        field.value = '';
+        renderMessages();
+        showToast('اتحفظت في ألبوم مسدجاتكم ♥');
+      });
+
+      updateDays();
+      startMemoryAudio();
+
+      let firstUserGestureUsed = false;
+      const startAudioOnFirstGesture = () => {
+        if (firstUserGestureUsed) return;
+        firstUserGestureUsed = true;
+        memoryAudio.muted = false;
+        memoryAudio.volume = 1;
+        if (memoryAudio.paused || memoryAudio.ended) {
+          startMemoryAudio();
+        } else {
+          memoryAudio.play().catch(() => {});
+        }
+        window.removeEventListener('pointerdown', startAudioOnFirstGesture);
+        window.removeEventListener('keydown', startAudioOnFirstGesture);
+      };
+      window.addEventListener('pointerdown', startAudioOnFirstGesture, { passive: true });
+      window.addEventListener('keydown', startAudioOnFirstGesture);
+    })();
+  </script>
+</body>
+</html>
